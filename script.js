@@ -1,4 +1,9 @@
 (() => {
+  const photoStyles = document.createElement('link');
+  photoStyles.rel = 'stylesheet';
+  photoStyles.href = 'photo-overrides.css';
+  document.head.appendChild(photoStyles);
+
   const revealItems = document.querySelectorAll('.reveal');
   const vacancySelect = document.querySelector('#vacancy-select');
   const objectInput = document.querySelector('#object-input');
