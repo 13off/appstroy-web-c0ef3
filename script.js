@@ -40,8 +40,9 @@
     window.setTimeout(() => toast.classList.remove('show'), 4200);
   };
 
-  document.querySelector('#application-form')?.addEventListener('submit', async (event) => {
+  document.querySelector('#application-form')?.addEventListener('submit', (event) => {
     event.preventDefault();
+
     const message = [
       'Заявка с сайта СКБС',
       `Объект: ${document.querySelector('#object-field')?.value || 'Мурманск'}`,
@@ -51,12 +52,11 @@
       `Опыт: ${document.querySelector('#experience')?.value || ''}`,
       `Комментарий: ${document.querySelector('#comment')?.value || '—'}`
     ].join('\n');
-    try {
-      await navigator.clipboard.writeText(message);
-      showToast('Анкета скопирована. Вставьте её сообщением в открывшемся боте.');
-    } catch {
-      showToast('Открою Telegram-бот. Сообщите ему данные из анкеты.');
-    }
-    window.setTimeout(() => window.open('https://t.me/skbs_work_bot?start=site', '_blank', 'noopener'), 350);
+
+    navigator.clipboard?.writeText(message).catch(() => {});
+    showToast('Открываю MAX с готовой анкетой. Выберите рабочий чат и отправьте сообщение.');
+
+    const maxShareUrl = `https://max.ru/:share?text=${encodeURIComponent(message)}`;
+    window.location.assign(maxShareUrl);
   });
 })();
