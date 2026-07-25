@@ -1,7 +1,8 @@
 (() => {
-  const chunks = window.__SKBS_CHUNKS__ || {hero: [], room: []};
+  const chunks = window.__SKBS_CHUNKS__ || {hero:[],room:[],hotel:[]};
   const heroUrl = chunks.hero.length ? `data:image/webp;base64,${chunks.hero.join('')}` : '';
   const roomUrl = chunks.room.length ? `data:image/webp;base64,${chunks.room.join('')}` : '';
+  const hotelUrl = chunks.hotel.length ? `data:image/webp;base64,${chunks.hotel.join('')}` : '';
 
   const heroBg = document.querySelector('#hero-bg');
   if (heroBg && heroUrl) heroBg.style.backgroundImage = `url("${heroUrl}")`;
@@ -9,6 +10,8 @@
   if (vacancyPhoto && heroUrl) vacancyPhoto.src = heroUrl;
   const roomPhoto = document.querySelector('#room-photo');
   if (roomPhoto && roomUrl) roomPhoto.src = roomUrl;
+  const hotelPhoto = document.querySelector('#hotel-photo');
+  if (hotelPhoto && hotelUrl) hotelPhoto.src = hotelUrl;
 
   const vacancies = [...document.querySelectorAll('.vacancy')];
   vacancies.forEach((vacancy) => {
@@ -32,16 +35,16 @@
 
   const dialog = document.querySelector('.lightbox');
   const dialogImage = dialog?.querySelector('img');
-  document.querySelector('#room-button')?.addEventListener('click', () => {
-    if (!dialog || !dialogImage || !roomUrl) return;
-    dialogImage.src = roomUrl;
-    dialogImage.alt = 'Комната в гостинице';
+  const openPhoto = (url, alt) => {
+    if (!dialog || !dialogImage || !url) return;
+    dialogImage.src = url;
+    dialogImage.alt = alt;
     dialog.showModal();
-  });
+  };
+  document.querySelector('#room-button')?.addEventListener('click', () => openPhoto(roomUrl, 'Комната в гостинице'));
+  document.querySelector('#hotel-button')?.addEventListener('click', () => openPhoto(hotelUrl, 'Коридор, душ, санузел и холодильники'));
   dialog?.querySelector('.lightbox-close')?.addEventListener('click', () => dialog.close());
-  dialog?.addEventListener('click', (event) => {
-    if (event.target === dialog) dialog.close();
-  });
+  dialog?.addEventListener('click', (event) => { if (event.target === dialog) dialog.close(); });
 
   const toast = document.querySelector('.toast');
   const showToast = (text) => {
@@ -62,7 +65,6 @@
       `Опыт: ${document.querySelector('#experience')?.value || ''}`,
       `Комментарий: ${document.querySelector('#comment')?.value || '—'}`
     ].join('\n');
-
     try {
       await navigator.clipboard.writeText(message);
       showToast('Анкета скопирована. Вставьте её сообщением в открывшемся боте.');
