@@ -1,4 +1,4 @@
-.hero-bg{background-image:url('assets/hero.webp')}
+.hero-bg{background-image:url('assets/hero-dc24977.webp')}
 .gallery-pair{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,.85fr);gap:12px}
 .gallery-pair .gallery-item{height:min(44vw,620px);min-height:320px;border-radius:18px}
 .gallery-no-labels .gallery-item span{display:none!important}
