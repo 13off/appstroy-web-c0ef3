@@ -1,6 +1,0 @@
-Cloudflare Pages
-Production branch: main
-Framework preset: None
-Build command: node build-assets.js
-Build output directory: .
-Root directory: leave blank

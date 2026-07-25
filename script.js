@@ -1,17 +1,4 @@
 (() => {
-  const heroUrl = '/assets/hero.webp?v=8';
-  const roomUrl = '/assets/room.webp?v=8';
-  const hotelUrl = '/assets/hotel.webp?v=8';
-
-  const heroBg = document.querySelector('#hero-bg');
-  if (heroBg) heroBg.style.backgroundImage = `url("${heroUrl}")`;
-  const vacancyPhoto = document.querySelector('#vacancy-photo');
-  if (vacancyPhoto) vacancyPhoto.src = heroUrl;
-  const roomPhoto = document.querySelector('#room-photo');
-  if (roomPhoto) roomPhoto.src = roomUrl;
-  const hotelPhoto = document.querySelector('#hotel-photo');
-  if (hotelPhoto) hotelPhoto.src = hotelUrl;
-
   const vacancies = [...document.querySelectorAll('.vacancy')];
   vacancies.forEach((vacancy) => {
     const trigger = vacancy.querySelector('.vacancy-trigger');
@@ -34,14 +21,14 @@
 
   const dialog = document.querySelector('.lightbox');
   const dialogImage = dialog?.querySelector('img');
-  const openPhoto = (url, alt) => {
-    if (!dialog || !dialogImage) return;
-    dialogImage.src = url;
-    dialogImage.alt = alt;
-    dialog.showModal();
-  };
-  document.querySelector('#room-button')?.addEventListener('click', () => openPhoto(roomUrl, 'Комната в гостинице'));
-  document.querySelector('#hotel-button')?.addEventListener('click', () => openPhoto(hotelUrl, 'Условия проживания'));
+  document.querySelectorAll('.gallery-item img').forEach((image) => {
+    image.closest('button')?.addEventListener('click', () => {
+      if (!dialog || !dialogImage) return;
+      dialogImage.src = image.src;
+      dialogImage.alt = image.alt;
+      dialog.showModal();
+    });
+  });
   dialog?.querySelector('.lightbox-close')?.addEventListener('click', () => dialog.close());
   dialog?.addEventListener('click', (event) => { if (event.target === dialog) dialog.close(); });
 
