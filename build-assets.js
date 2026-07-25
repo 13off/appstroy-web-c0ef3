@@ -25,7 +25,7 @@ for (const [key, asset] of Object.entries(packedAssets)) {
   const extension = extensionByMime[asset.mime] || 'bin';
   const fileName = `${key}.${extension}`;
   fs.writeFileSync(path.join(outputDir, fileName), Buffer.from(asset.data, 'base64'));
-  publicAssets[key] = `/assets/${fileName}`;
+  publicAssets[key] = `assets/${fileName}`;
 }
 
 fs.writeFileSync(
@@ -42,12 +42,16 @@ html = html.replace(
 );
 html = html.replace(
   '<div class="vacancy-panel vacancy-panel-soon" hidden>\n            <p>Добавим условия, вакансии и дату ближайшего заезда.</p>\n          </div>',
-  '<div class="vacancy-panel vacancy-panel-soon" hidden>\n            <p>Отдельный объект в Москве. Условия, вакансии и дату заезда добавим позже.</p>\n          </div>',
+  '<div class="vacancy-panel vacancy-panel-soon" hidden>\n            <p>Отдельный объект в Москве. Условия и дату заезда добавим позже.</p>\n          </div>',
 );
 html = html.replace(
   '<div class="vacancy-panel vacancy-panel-soon" hidden>\n            <p>Добавим условия, вакансии и дату ближайшего заезда.</p>\n          </div>',
-  '<div class="vacancy-panel vacancy-panel-soon" hidden>\n            <p>Отдельный объект в Забайкалье — медный завод. Условия и дату заезда добавим позже.</p>\n          </div>',
+  '<div class="vacancy-panel vacancy-panel-soon" hidden>\n            <p>Отдельный объект в Забайкалье — медный завод. Условия добавим позже.</p>\n          </div>',
 );
+html = html.replace(/\sdata-netlify="true"/g, '');
+html = html.replace(/\snetlify-honeypot="company-site"/g, '');
+html = html.replace(/\n\s*<input type="hidden" name="form-name" value="job-application">/g, '');
+html = html.replace(/\n\s*<p class="hidden"><label>Не заполняйте <input name="company-site"><\/label><\/p>/g, '');
 if (!html.includes('asset-map.js')) {
   html = html.replace(
     '<script src="script.js"></script>',
@@ -56,4 +60,5 @@ if (!html.includes('asset-map.js')) {
 }
 fs.writeFileSync(indexPath, html, 'utf8');
 
+fs.writeFileSync(path.join(__dirname, '.nojekyll'), '', 'utf8');
 console.log(`Подготовлено изображений: ${Object.keys(publicAssets).length}`);
