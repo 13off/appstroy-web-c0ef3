@@ -53,4 +53,10 @@
   dialog?.addEventListener('click', (event) => {
     if (event.target === dialog) dialog.close();
   });
+
+  const form = document.querySelector('form[name="job-application"]');
+  form?.addEventListener('submit', (event) => {
+    event.preventDefault();
+    alert('Сайт уже работает на GitHub Pages. Приём заявок подключим к Telegram или базе отдельным шагом.');
+  });
 })();
