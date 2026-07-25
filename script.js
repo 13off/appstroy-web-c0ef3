@@ -1,18 +1,14 @@
 (() => {
-  const finalStyles = document.createElement('link');
-  finalStyles.rel = 'stylesheet';
-  finalStyles.href = 'final.css';
-  document.head.appendChild(finalStyles);
+  const chunks = window.__SKBS_CHUNKS__ || {hero: [], room: []};
+  const heroUrl = chunks.hero.length ? `data:image/webp;base64,${chunks.hero.join('')}` : '';
+  const roomUrl = chunks.room.length ? `data:image/webp;base64,${chunks.room.join('')}` : '';
 
-  const assets = window.__SKBS_ASSETS__ || {};
-  document.querySelectorAll('[data-asset]').forEach((element) => {
-    const url = assets[element.dataset.asset];
-    if (url && element instanceof HTMLImageElement) element.src = url;
-  });
-  document.querySelectorAll('[data-bg-asset]').forEach((element) => {
-    const url = assets[element.dataset.bgAsset];
-    if (url) element.style.backgroundImage = `url("${url}")`;
-  });
+  const heroBg = document.querySelector('#hero-bg');
+  if (heroBg && heroUrl) heroBg.style.backgroundImage = `url("${heroUrl}")`;
+  const vacancyPhoto = document.querySelector('#vacancy-photo');
+  if (vacancyPhoto && heroUrl) vacancyPhoto.src = heroUrl;
+  const roomPhoto = document.querySelector('#room-photo');
+  if (roomPhoto && roomUrl) roomPhoto.src = roomUrl;
 
   const vacancies = [...document.querySelectorAll('.vacancy')];
   vacancies.forEach((vacancy) => {
@@ -36,16 +32,16 @@
 
   const dialog = document.querySelector('.lightbox');
   const dialogImage = dialog?.querySelector('img');
-  const counter = dialog?.querySelector('.lightbox-count');
-  document.querySelector('[data-gallery-index="0"]')?.addEventListener('click', () => {
-    if (!dialog || !dialogImage || !assets.room) return;
-    dialogImage.src = assets.room;
+  document.querySelector('#room-button')?.addEventListener('click', () => {
+    if (!dialog || !dialogImage || !roomUrl) return;
+    dialogImage.src = roomUrl;
     dialogImage.alt = 'Комната в гостинице';
-    if (counter) counter.textContent = 'Проживание';
     dialog.showModal();
   });
   dialog?.querySelector('.lightbox-close')?.addEventListener('click', () => dialog.close());
-  dialog?.addEventListener('click', (event) => { if (event.target === dialog) dialog.close(); });
+  dialog?.addEventListener('click', (event) => {
+    if (event.target === dialog) dialog.close();
+  });
 
   const toast = document.querySelector('.toast');
   const showToast = (text) => {
@@ -66,6 +62,7 @@
       `Опыт: ${document.querySelector('#experience')?.value || ''}`,
       `Комментарий: ${document.querySelector('#comment')?.value || '—'}`
     ].join('\n');
+
     try {
       await navigator.clipboard.writeText(message);
       showToast('Анкета скопирована. Вставьте её сообщением в открывшемся боте.');
