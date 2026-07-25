@@ -1,38 +1,15 @@
 (() => {
-  const partUrls = Array.from(
-    { length: 14 },
-    (_, index) => `asset-data/asset-${String(index).padStart(2, '0')}.txt`,
-  );
+  const urls = window.__SKBS_ASSETS__ || {};
 
-  async function loadAssets() {
-    const parts = await Promise.all(
-      partUrls.map(async (url) => {
-        const response = await fetch(url);
-        if (!response.ok) throw new Error(`Не удалось загрузить ${url}`);
-        return response.text();
-      }),
-    );
+  document.querySelectorAll('[data-asset]').forEach((element) => {
+    const url = urls[element.dataset.asset];
+    if (url && element instanceof HTMLImageElement) element.src = url;
+  });
 
-    const data = JSON.parse(parts.join(''));
-    const urls = Object.fromEntries(
-      Object.entries(data).map(([key, value]) => [
-        key,
-        `data:${value.mime};base64,${value.data}`,
-      ]),
-    );
-
-    document.querySelectorAll('[data-asset]').forEach((element) => {
-      const url = urls[element.dataset.asset];
-      if (url && element instanceof HTMLImageElement) element.src = url;
-    });
-
-    document.querySelectorAll('[data-bg-asset]').forEach((element) => {
-      const url = urls[element.dataset.bgAsset];
-      if (url) element.style.backgroundImage = `url("${url}")`;
-    });
-  }
-
-  loadAssets().catch((error) => console.error('Ошибка загрузки фотографий:', error));
+  document.querySelectorAll('[data-bg-asset]').forEach((element) => {
+    const url = urls[element.dataset.bgAsset];
+    if (url) element.style.backgroundImage = `url("${url}")`;
+  });
 
   const vacancies = document.querySelectorAll('.vacancy');
   vacancies.forEach((vacancy) => {
@@ -57,7 +34,7 @@
   const objectField = document.querySelector('#object-field');
   document.querySelectorAll('.vacancy-apply').forEach((link) => {
     link.addEventListener('click', () => {
-      if (objectField) objectField.value = link.dataset.object || 'Мурманск';
+      if (objectField) objectField.value = link.dataset.object || 'Мурманск — кафедральный собор';
     });
   });
 
