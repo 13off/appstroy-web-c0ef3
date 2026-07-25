@@ -1,52 +1,79 @@
 (() => {
-  const photoStyles = document.createElement('link');
-  photoStyles.rel = 'stylesheet';
-  photoStyles.href = 'photo-overrides.css';
-  document.head.appendChild(photoStyles);
+  const partUrls = Array.from(
+    { length: 14 },
+    (_, index) => `asset-data/asset-${String(index).padStart(2, '0')}.txt`,
+  );
 
-  const revealItems = document.querySelectorAll('.reveal');
-  const vacancySelect = document.querySelector('#vacancy-select');
-  const objectInput = document.querySelector('#object-input');
-  const applicationSection = document.querySelector('#application');
+  async function loadAssets() {
+    const parts = await Promise.all(
+      partUrls.map(async (url) => {
+        const response = await fetch(url);
+        if (!response.ok) throw new Error(`Не удалось загрузить ${url}`);
+        return response.text();
+      }),
+    );
 
-  if ('IntersectionObserver' in window) {
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('is-visible');
-          observer.unobserve(entry.target);
-        }
-      });
-    }, { threshold: 0.12, rootMargin: '0px 0px -40px' });
+    const data = JSON.parse(parts.join(''));
+    const urls = Object.fromEntries(
+      Object.entries(data).map(([key, value]) => [
+        key,
+        `data:${value.mime};base64,${value.data}`,
+      ]),
+    );
 
-    revealItems.forEach((item) => observer.observe(item));
-  } else {
-    revealItems.forEach((item) => item.classList.add('is-visible'));
+    document.querySelectorAll('[data-asset]').forEach((element) => {
+      const url = urls[element.dataset.asset];
+      if (url && element instanceof HTMLImageElement) element.src = url;
+    });
+
+    document.querySelectorAll('[data-bg-asset]').forEach((element) => {
+      const url = urls[element.dataset.bgAsset];
+      if (url) element.style.backgroundImage = `url("${url}")`;
+    });
   }
 
-  document.querySelectorAll('.vacancy-card').forEach((card) => {
-    const button = card.querySelector('.card-action');
-    button?.addEventListener('click', () => {
-      const vacancy = card.dataset.vacancy || '';
-      const object = card.dataset.object || '';
+  loadAssets().catch((error) => console.error('Ошибка загрузки фотографий:', error));
 
-      if (vacancySelect) vacancySelect.value = vacancy;
-      if (objectInput) objectInput.value = object;
-
-      applicationSection?.scrollIntoView({ behavior: 'smooth', block: 'start' });
-      window.setTimeout(() => document.querySelector('[name="full_name"]')?.focus({ preventScroll: true }), 650);
-    });
-  });
-
-  document.querySelectorAll('.faq-item').forEach((item) => {
-    item.addEventListener('toggle', () => {
-      if (!item.open) return;
-      document.querySelectorAll('.faq-item[open]').forEach((other) => {
-        if (other !== item) other.removeAttribute('open');
+  const vacancies = document.querySelectorAll('.vacancy');
+  vacancies.forEach((vacancy) => {
+    const trigger = vacancy.querySelector('.vacancy-trigger');
+    const panel = vacancy.querySelector('.vacancy-panel');
+    trigger?.addEventListener('click', () => {
+      const opening = !vacancy.classList.contains('open');
+      vacancies.forEach((other) => {
+        other.classList.remove('open');
+        other.querySelector('.vacancy-trigger')?.setAttribute('aria-expanded', 'false');
+        const otherPanel = other.querySelector('.vacancy-panel');
+        if (otherPanel) otherPanel.hidden = true;
       });
+      if (opening) {
+        vacancy.classList.add('open');
+        trigger.setAttribute('aria-expanded', 'true');
+        if (panel) panel.hidden = false;
+      }
     });
   });
 
-  const year = document.querySelector('#current-year');
-  if (year) year.textContent = new Date().getFullYear();
+  const objectField = document.querySelector('#object-field');
+  document.querySelectorAll('.vacancy-apply').forEach((link) => {
+    link.addEventListener('click', () => {
+      if (objectField) objectField.value = link.dataset.object || 'Мурманск';
+    });
+  });
+
+  const dialog = document.querySelector('.lightbox');
+  const dialogImage = dialog?.querySelector('img');
+  document.querySelectorAll('.gallery-item').forEach((item) => {
+    item.addEventListener('click', () => {
+      if (!dialog || !dialogImage) return;
+      const image = item.querySelector('img');
+      dialogImage.src = image?.src || '';
+      dialogImage.alt = image?.alt || '';
+      dialog.showModal();
+    });
+  });
+  dialog?.querySelector('.lightbox-close')?.addEventListener('click', () => dialog.close());
+  dialog?.addEventListener('click', (event) => {
+    if (event.target === dialog) dialog.close();
+  });
 })();
