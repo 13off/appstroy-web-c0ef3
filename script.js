@@ -1,11 +1,14 @@
 (() => {
-  const assets = window.__SKBS_ASSETS__ || {};
+  const finalStyles = document.createElement('link');
+  finalStyles.rel = 'stylesheet';
+  finalStyles.href = 'final.css';
+  document.head.appendChild(finalStyles);
 
+  const assets = window.__SKBS_ASSETS__ || {};
   document.querySelectorAll('[data-asset]').forEach((element) => {
     const url = assets[element.dataset.asset];
     if (url && element instanceof HTMLImageElement) element.src = url;
   });
-
   document.querySelectorAll('[data-bg-asset]').forEach((element) => {
     const url = assets[element.dataset.bgAsset];
     if (url) element.style.backgroundImage = `url("${url}")`;
@@ -31,22 +34,15 @@
     });
   });
 
-  const gallery = [
-    [assets.room, 'Комната в гостинице'],
-    [assets.hotelCollage, 'Гостиница и бытовые условия']
-  ];
   const dialog = document.querySelector('.lightbox');
   const dialogImage = dialog?.querySelector('img');
   const counter = dialog?.querySelector('.lightbox-count');
-  document.querySelectorAll('[data-gallery-index]').forEach((button) => {
-    button.addEventListener('click', () => {
-      const index = Number(button.dataset.galleryIndex || 0);
-      if (!dialog || !dialogImage || !gallery[index]?.[0]) return;
-      dialogImage.src = gallery[index][0];
-      dialogImage.alt = gallery[index][1];
-      if (counter) counter.textContent = `${index + 1} / ${gallery.length}`;
-      dialog.showModal();
-    });
+  document.querySelector('[data-gallery-index="0"]')?.addEventListener('click', () => {
+    if (!dialog || !dialogImage || !assets.room) return;
+    dialogImage.src = assets.room;
+    dialogImage.alt = 'Комната в гостинице';
+    if (counter) counter.textContent = 'Проживание';
+    dialog.showModal();
   });
   dialog?.querySelector('.lightbox-close')?.addEventListener('click', () => dialog.close());
   dialog?.addEventListener('click', (event) => { if (event.target === dialog) dialog.close(); });
@@ -59,8 +55,7 @@
     window.setTimeout(() => toast.classList.remove('show'), 4200);
   };
 
-  const form = document.querySelector('#application-form');
-  form?.addEventListener('submit', async (event) => {
+  document.querySelector('#application-form')?.addEventListener('submit', async (event) => {
     event.preventDefault();
     const message = [
       'Заявка с сайта СКБС',
@@ -71,7 +66,6 @@
       `Опыт: ${document.querySelector('#experience')?.value || ''}`,
       `Комментарий: ${document.querySelector('#comment')?.value || '—'}`
     ].join('\n');
-
     try {
       await navigator.clipboard.writeText(message);
       showToast('Анкета скопирована. Вставьте её сообщением в открывшемся боте.');
