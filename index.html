@@ -10,7 +10,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
-  <link rel="stylesheet" href="final.css">
+  <link rel="stylesheet" href="final.css?v=appstroy-1">
 </head>
 <body>
   <header class="header">
@@ -101,17 +101,18 @@
     </section>
 
     <section class="section apply" id="apply">
-      <div class="apply-copy"><span class="kicker">Отклик</span><h2>Готовы на вахту?</h2><p>Заполните короткую анкету. MAX откроется с готовым текстом заявки.</p></div>
+      <div class="apply-copy"><span class="kicker">Отклик</span><h2>Готовы на вахту?</h2><p>Заполните короткую анкету. После отправки заявка сразу появится в кадровой CRM AppСтрой.</p></div>
       <form class="form" id="application-form">
         <input type="hidden" id="object-field" value="Мурманск — кафедральный собор">
-        <label><span>ФИО</span><input type="text" id="full-name" autocomplete="name" placeholder="Иван Иванов" required></label>
-        <label><span>Телефон</span><input type="tel" id="phone" autocomplete="tel" inputmode="tel" placeholder="+7 999 000-00-00" required></label>
-        <label><span>Город</span><input type="text" id="city" autocomplete="address-level2" placeholder="Ваш город" required></label>
+        <label><span>ФИО</span><input type="text" id="full-name" autocomplete="name" placeholder="Иван Иванов" maxlength="160" required></label>
+        <label><span>Телефон</span><input type="tel" id="phone" autocomplete="tel" inputmode="tel" placeholder="+7 999 000-00-00" maxlength="30" required></label>
+        <label><span>Город</span><input type="text" id="city" autocomplete="address-level2" placeholder="Ваш город" maxlength="160" required></label>
         <label><span>Опыт</span><select id="experience" required><option value="" selected disabled>Выберите</option><option>Без опыта</option><option>До 1 года</option><option>1–3 года</option><option>Более 3 лет</option></select></label>
-        <label class="form-wide"><span>Комментарий</span><textarea id="comment" rows="3" placeholder="Разряд и когда готовы выехать"></textarea></label>
-        <label class="consent form-wide"><input type="checkbox" required><span>Согласен на обработку данных. <a href="privacy.html" target="_blank">Политика</a></span></label>
-        <button class="button button-gold form-wide" type="submit">Отправить через MAX</button>
-        <p class="form-note form-wide">В MAX останется выбрать рабочий чат и нажать «Отправить».</p>
+        <label class="form-wide"><span>Комментарий</span><textarea id="comment" rows="3" maxlength="2000" placeholder="Разряд и когда готовы выехать"></textarea></label>
+        <label class="hp-field" aria-hidden="true"><span>Сайт</span><input type="text" id="website" tabindex="-1" autocomplete="off"></label>
+        <label class="consent form-wide"><input type="checkbox" id="consent" required><span>Согласен на обработку данных. <a href="privacy.html" target="_blank">Политика</a></span></label>
+        <button class="button button-gold form-wide" id="submit-application" type="submit">Отправить заявку</button>
+        <p class="form-note form-wide">После отправки мы получим заявку в AppСтрой и свяжемся с вами по телефону.</p>
       </form>
     </section>
   </main>
@@ -120,6 +121,6 @@
 
   <dialog class="lightbox" aria-label="Просмотр фотографии"><button class="lightbox-close" type="button" aria-label="Закрыть">×</button><img src="" alt=""></dialog>
   <div class="toast" role="status" aria-live="polite"></div>
-  <script src="script.js?v=max-1"></script>
+  <script src="script.js?v=appstroy-1"></script>
 </body>
 </html>
