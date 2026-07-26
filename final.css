@@ -9,4 +9,7 @@
 .brand-khm small{font-size:10px;letter-spacing:.04em;text-transform:uppercase}
 .brand-fosagro{color:#28569a;font-size:clamp(24px,3vw,46px);letter-spacing:-.045em}
 .brand-flower{color:#68aa51;font-size:32px}
+.hp-field{position:absolute!important;left:-10000px!important;top:auto!important;width:1px!important;height:1px!important;overflow:hidden!important;opacity:0!important;pointer-events:none!important}
+#submit-application:disabled{cursor:wait;opacity:.7}
+.form[aria-busy="true"] input,.form[aria-busy="true"] select,.form[aria-busy="true"] textarea{opacity:.72}
 @media(max-width:700px){.gallery-pair{grid-template-columns:1fr}.gallery-pair .gallery-item{height:320px;min-height:0}.partner-text-logos .brand-card{height:112px}}
