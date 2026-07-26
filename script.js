@@ -33,30 +33,82 @@
   dialog?.addEventListener('click', (event) => { if (event.target === dialog) dialog.close(); });
 
   const toast = document.querySelector('.toast');
-  const showToast = (text) => {
+  let toastTimer;
+  const showToast = (text, duration = 5200) => {
     if (!toast) return;
+    window.clearTimeout(toastTimer);
     toast.textContent = text;
     toast.classList.add('show');
-    window.setTimeout(() => toast.classList.remove('show'), 4200);
+    toastTimer = window.setTimeout(() => toast.classList.remove('show'), duration);
   };
 
-  document.querySelector('#application-form')?.addEventListener('submit', (event) => {
+  const endpoint = 'https://dxbrhsefgxcaxzmrbfrb.supabase.co/functions/v1/site-recruitment-application';
+  const form = document.querySelector('#application-form');
+  const submitButton = document.querySelector('#submit-application');
+  let formStartedAt = Date.now();
+  let submitting = false;
+
+  const errorMessage = (code) => {
+    switch (code) {
+      case 'invalid_phone': return 'Проверьте номер телефона.';
+      case 'invalid_full_name': return 'Укажите полное ФИО.';
+      case 'invalid_city': return 'Укажите ваш город.';
+      case 'consent_required': return 'Нужно согласие на обработку данных.';
+      case 'invalid_form_timing': return 'Обновите страницу и заполните анкету ещё раз.';
+      default: return 'Не удалось отправить заявку. Попробуйте ещё раз через минуту.';
+    }
+  };
+
+  form?.addEventListener('submit', async (event) => {
     event.preventDefault();
+    if (submitting) return;
 
-    const message = [
-      'Заявка с сайта СКБС',
-      `Объект: ${document.querySelector('#object-field')?.value || 'Мурманск'}`,
-      `ФИО: ${document.querySelector('#full-name')?.value || ''}`,
-      `Телефон: ${document.querySelector('#phone')?.value || ''}`,
-      `Город: ${document.querySelector('#city')?.value || ''}`,
-      `Опыт: ${document.querySelector('#experience')?.value || ''}`,
-      `Комментарий: ${document.querySelector('#comment')?.value || '—'}`
-    ].join('\n');
+    submitting = true;
+    form.setAttribute('aria-busy', 'true');
+    if (submitButton) {
+      submitButton.disabled = true;
+      submitButton.textContent = 'Отправляем…';
+    }
 
-    navigator.clipboard?.writeText(message).catch(() => {});
-    showToast('Открываю MAX с готовой анкетой. Выберите рабочий чат и отправьте сообщение.');
+    const requestId = globalThis.crypto?.randomUUID?.()
+      ?? `site-${Date.now()}-${Math.random().toString(16).slice(2)}`;
+    const payload = {
+      requestId,
+      fullName: document.querySelector('#full-name')?.value || '',
+      phone: document.querySelector('#phone')?.value || '',
+      city: document.querySelector('#city')?.value || '',
+      experience: document.querySelector('#experience')?.value || '',
+      comment: document.querySelector('#comment')?.value || '',
+      consent: document.querySelector('#consent')?.checked === true,
+      website: document.querySelector('#website')?.value || '',
+      startedAt: formStartedAt,
+      sourceUrl: window.location.href
+    };
 
-    const maxShareUrl = `https://max.ru/:share?text=${encodeURIComponent(message)}`;
-    window.location.assign(maxShareUrl);
+    try {
+      const response = await fetch(endpoint, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(payload)
+      });
+      const data = await response.json().catch(() => ({}));
+      if (!response.ok || data.ok !== true) {
+        throw new Error(data.error || 'server_error');
+      }
+
+      const number = data.number ? ` №${data.number}` : '';
+      showToast(`Заявка${number} принята. Она уже появилась в AppСтрой. Скоро с вами свяжутся.`, 8000);
+      form.reset();
+      formStartedAt = Date.now();
+    } catch (error) {
+      showToast(errorMessage(error?.message));
+    } finally {
+      submitting = false;
+      form.removeAttribute('aria-busy');
+      if (submitButton) {
+        submitButton.disabled = false;
+        submitButton.textContent = 'Отправить заявку';
+      }
+    }
   });
 })();
