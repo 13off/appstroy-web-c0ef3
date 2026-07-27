@@ -10,9 +10,15 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
-  <link rel="stylesheet" href="final.css?v=vacancies-2">
+  <link rel="stylesheet" href="final.css?v=live-photos-1">
 </head>
 <body>
+  <div class="page-photo-bg" aria-hidden="true">
+    <div class="page-photo-layer page-photo-object"></div>
+    <div class="page-photo-layer page-photo-room"></div>
+    <div class="page-photo-layer page-photo-corridor"></div>
+  </div>
+
   <header class="header">
     <a class="wordmark" href="#top">СКБС</a>
     <nav class="nav" aria-label="Навигация">
@@ -24,7 +30,7 @@
   </header>
 
   <main id="top">
-    <section class="hero">
+    <section class="hero" data-photo-scene="object">
       <div class="hero-bg" aria-hidden="true"></div>
       <div class="hero-content">
         <span class="status"><i></i> Мурманск · набор открыт</span>
@@ -38,7 +44,7 @@
       <div class="hero-meta"><span>Центр города</span><span>Вахта от 2 месяцев</span><span>08:00–19:00</span></div>
     </section>
 
-    <section class="section vacancies" id="vacancies">
+    <section class="section vacancies" id="vacancies" data-photo-scene="object">
       <div class="section-head"><div><span class="kicker">Мурманск · кафедральный собор</span><h2>Вакансии</h2></div></div>
       <div class="vacancy-list">
         <article class="vacancy is-selected" data-vacancy-key="concrete">
@@ -47,7 +53,6 @@
             <span class="vacancy-pay">180–230 тыс. ₽<small>/ вахтовый месяц</small></span><span class="plus" aria-hidden="true"></span>
           </button>
           <div class="vacancy-panel" hidden>
-            <div class="vacancy-photo"><img src="assets/hero-dc24977.webp" alt="Строительство кафедрального собора в Мурманске"></div>
             <div class="details">
               <div><span>Объект</span><b>Кафедральный собор</b><small>Центр Мурманска</small></div>
               <div><span>График</span><b>08:00–19:00</b><small>Обед 12:00–13:00, перерывы на чай</small></div>
@@ -68,7 +73,6 @@
             <span class="vacancy-pay">5 000 ₽<small>/ смена</small></span><span class="plus" aria-hidden="true"></span>
           </button>
           <div class="vacancy-panel" hidden>
-            <div class="vacancy-photo"><img src="assets/hero-dc24977.webp" alt="Строительный объект в Мурманске"></div>
             <div class="details">
               <div><span>Объект</span><b>Кафедральный собор</b><small>Центр Мурманска</small></div>
               <div><span>График</span><b>08:00–19:00</b><small>Обед 12:00–13:00, перерывы на чай</small></div>
@@ -89,7 +93,6 @@
             <span class="vacancy-pay">200–250 тыс. ₽<small>/ вахтовый месяц</small></span><span class="plus" aria-hidden="true"></span>
           </button>
           <div class="vacancy-panel" hidden>
-            <div class="vacancy-photo"><img src="assets/hero-dc24977.webp" alt="Строительство кафедрального собора в Мурманске"></div>
             <div class="details">
               <div><span>Объект</span><b>Кафедральный собор</b><small>Центр Мурманска</small></div>
               <div><span>Задачи</span><b>Организация работ</b><small>Контроль бригад, сроков и качества</small></div>
@@ -110,7 +113,6 @@
             <span class="vacancy-pay">250–300 тыс. ₽<small>/ вахтовый месяц</small></span><span class="plus" aria-hidden="true"></span>
           </button>
           <div class="vacancy-panel" hidden>
-            <div class="vacancy-photo"><img src="assets/hero-dc24977.webp" alt="Строительный объект в центре Мурманска"></div>
             <div class="details">
               <div><span>Объект</span><b>Кафедральный собор</b><small>Центр Мурманска</small></div>
               <div><span>Задачи</span><b>Управление участком</b><small>Люди, сроки, качество и производственный план</small></div>
@@ -127,18 +129,22 @@
       </div>
     </section>
 
-    <section class="section living" id="living">
+    <section class="section living" id="living" data-photo-scene="room">
       <div class="section-head living-head">
         <div><span class="kicker">Проживание</span><h2>Чисто и рядом</h2></div>
         <p>2–3 человека в комнате<br>15 минут до объекта</p>
       </div>
-      <div class="gallery gallery-pair gallery-no-labels">
-        <button class="gallery-item" type="button"><img src="assets/room-dc24977.webp" alt="Комната в гостинице"></button>
-        <button class="gallery-item" type="button"><img src="assets/corridor-dc24977.webp" alt="Коридор гостиницы"></button>
+      <div class="gallery gallery-expanded gallery-no-labels">
+        <button class="gallery-item gallery-item-wide" type="button" data-gallery-src="assets/room-dc24977.webp"><img src="assets/room-dc24977.webp" alt="Комната в гостинице"></button>
+        <button class="gallery-item gallery-item-tall" type="button" data-gallery-src="assets/corridor-dc24977.webp"><img src="assets/corridor-dc24977.webp" alt="Коридор гостиницы"></button>
+        <button class="gallery-item gallery-detail gallery-room-left" type="button" data-gallery-src="assets/room-dc24977.webp" aria-label="Открыть фотографию спальных мест"><img src="assets/room-dc24977.webp" alt="Спальные места в комнате"></button>
+        <button class="gallery-item gallery-detail gallery-room-right" type="button" data-gallery-src="assets/room-dc24977.webp" aria-label="Открыть фотографию комнаты у окна"><img src="assets/room-dc24977.webp" alt="Комната у окна"></button>
+        <button class="gallery-item gallery-detail gallery-corridor-near" type="button" data-gallery-src="assets/corridor-dc24977.webp" aria-label="Открыть ближний вид коридора"><img src="assets/corridor-dc24977.webp" alt="Ближний вид коридора"></button>
+        <button class="gallery-item gallery-detail gallery-corridor-far" type="button" data-gallery-src="assets/corridor-dc24977.webp" aria-label="Открыть общий вид гостиницы"><img src="assets/corridor-dc24977.webp" alt="Общий вид коридора гостиницы"></button>
       </div>
     </section>
 
-    <section class="partners" id="partners" aria-label="Компании, с которыми работаем в Мурманске">
+    <section class="partners" id="partners" data-photo-scene="corridor" aria-label="Компании, с которыми работаем в Мурманске">
       <div class="partners-copy"><span class="kicker">Мурманск</span><h2>Работаем вместе</h2><p>ПСМ · Коксохиммонтаж · ФосАгро</p></div>
       <div class="partner-logos partner-text-logos">
         <div class="brand-card brand-psm">ПСМ</div>
@@ -147,7 +153,7 @@
       </div>
     </section>
 
-    <section class="section apply" id="apply">
+    <section class="section apply" id="apply" data-photo-scene="object">
       <div class="apply-copy"><span class="kicker">Отклик</span><h2>Готовы на вахту?</h2><p>Выберите вакансию и заполните короткую анкету. После отправки заявка сразу появится в кадровой CRM AppСтрой.</p></div>
       <form class="form" id="application-form">
         <input type="hidden" id="vacancy-key" value="concrete">
@@ -169,6 +175,6 @@
 
   <dialog class="lightbox" aria-label="Просмотр фотографии"><button class="lightbox-close" type="button" aria-label="Закрыть">×</button><img src="" alt=""></dialog>
   <div class="toast" role="status" aria-live="polite"></div>
-  <script src="script.js?v=vacancies-2"></script>
+  <script src="script.js?v=live-photos-1"></script>
 </body>
 </html>
