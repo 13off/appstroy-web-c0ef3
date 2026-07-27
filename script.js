@@ -1,6 +1,11 @@
 (() => {
   'use strict';
 
+  const motionStyles = document.createElement('link');
+  motionStyles.rel = 'stylesheet';
+  motionStyles.href = 'motion-layer.css?v=smooth-scenes-1';
+  document.head.appendChild(motionStyles);
+
   const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   const canHover = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
   const vacancyTitles = {
@@ -11,16 +16,20 @@
   };
 
   const clamp = (value, min, max) => Math.min(Math.max(value, min), max);
+  const smoothStep = (value) => {
+    const normalized = clamp(value, 0, 1);
+    return normalized * normalized * (3 - 2 * normalized);
+  };
   const easeOutCubic = (value) => 1 - Math.pow(1 - value, 3);
 
   const body = document.body;
+  const main = document.querySelector('main');
   const header = document.querySelector('[data-header]');
   const progress = document.querySelector('.page-progress i');
   const hero = document.querySelector('[data-hero]');
-  const heroImage = hero?.querySelector('.hero-media img');
   const heroCopy = hero?.querySelector('.hero-copy');
   const objectStory = document.querySelector('.object-story');
-  const objectImage = objectStory?.querySelector('.object-media img');
+  const livingSection = document.querySelector('.living');
 
   const finishLoading = () => {
     body.classList.remove('is-loading');
@@ -42,6 +51,7 @@
         observer.unobserve(entry.target);
       });
     }, { rootMargin: '0px 0px -9% 0px', threshold: 0.12 });
+
     revealItems.forEach((item, index) => {
       item.style.transitionDelay = `${Math.min(index % 4, 3) * 55}ms`;
       revealObserver.observe(item);
@@ -53,6 +63,34 @@
     .map((link) => document.querySelector(link.getAttribute('href')))
     .filter(Boolean);
 
+  const updateCinema = (scrollY, viewport) => {
+    if (!main || !hero || !objectStory) return;
+
+    if (reduceMotion) {
+      main.style.setProperty('--scene-mix', '0');
+      main.style.setProperty('--scene-visibility', '1');
+      return;
+    }
+
+    const transitionStart = hero.offsetTop + hero.offsetHeight * 0.36;
+    const transitionEnd = objectStory.offsetTop + viewport * 0.22;
+    const transitionDistance = Math.max(transitionEnd - transitionStart, 1);
+    const rawMix = (scrollY - transitionStart) / transitionDistance;
+    const sceneMix = smoothStep(rawMix);
+
+    const fadeStart = objectStory.offsetTop + objectStory.offsetHeight * 0.72;
+    const fadeEnd = livingSection
+      ? livingSection.offsetTop + viewport * 0.12
+      : objectStory.offsetTop + objectStory.offsetHeight;
+    const fadeDistance = Math.max(fadeEnd - fadeStart, 1);
+    const sceneVisibility = 1 - smoothStep((scrollY - fadeStart) / fadeDistance);
+
+    main.style.setProperty('--scene-mix', sceneMix.toFixed(4));
+    main.style.setProperty('--scene-visibility', clamp(sceneVisibility, 0, 1).toFixed(4));
+    main.style.setProperty('--scene-a-scale', (1.035 + sceneMix * 0.055).toFixed(4));
+    main.style.setProperty('--scene-b-scale', (1.09 - sceneMix * 0.04).toFixed(4));
+  };
+
   let scrollFrame = 0;
   const updateScrollEffects = () => {
     scrollFrame = 0;
@@ -62,21 +100,13 @@
 
     if (progress) progress.style.transform = `scaleX(${clamp(scrollY / documentHeight, 0, 1)})`;
     header?.classList.toggle('is-compact', scrollY > 26);
+    updateCinema(scrollY, viewport);
 
-    if (!reduceMotion && hero) {
+    if (!reduceMotion && hero && heroCopy) {
       const rect = hero.getBoundingClientRect();
       const localProgress = clamp(-rect.top / Math.max(rect.height, 1), 0, 1);
-      if (heroImage) {
-        heroImage.style.transform = `scale(${1.08 + localProgress * 0.075}) translate3d(0, ${localProgress * 5.5}%, 0)`;
-        heroImage.style.filter = `saturate(${0.78 - localProgress * 0.08}) contrast(1.07) brightness(${1 - localProgress * 0.16})`;
-      }
-      if (heroCopy) heroCopy.style.transform = `translate3d(0, ${localProgress * 44}px, 0)`;
-    }
-
-    if (!reduceMotion && objectStory && objectImage) {
-      const rect = objectStory.getBoundingClientRect();
-      const progressThrough = clamp((viewport - rect.top) / (viewport + rect.height), 0, 1);
-      objectImage.style.transform = `scale(1.11) translate3d(0, ${(progressThrough - 0.5) * 8}%, 0)`;
+      heroCopy.style.transform = `translate3d(0, ${localProgress * 38}px, 0)`;
+      heroCopy.style.opacity = String(1 - localProgress * 0.23);
     }
 
     let activeSection = null;
