@@ -1,0 +1,81 @@
+:root{
+  --ease-fast:cubic-bezier(.22,1,.36,1);
+}
+
+.site-header{
+  transition-duration:.28s;
+}
+
+.site-nav a::after{
+  transition-duration:.22s;
+}
+
+.header-cta{
+  transition-duration:.2s;
+}
+
+.title-line>span{
+  transition-duration:.62s;
+}
+
+.title-line:nth-child(2)>span{transition-delay:.04s}
+.title-line:nth-child(3)>span{transition-delay:.08s}
+
+.button{
+  transition-duration:.22s,.2s,.2s,.2s,.2s;
+}
+
+.button i{
+  transition-duration:.22s;
+}
+
+.scroll-cue i::after{
+  animation-duration:1.55s;
+}
+
+.ticker-track{
+  animation-duration:18s;
+}
+
+.vacancy{
+  transition-duration:.28s;
+}
+
+.vacancy::before{
+  transition-duration:.2s,.28s,.25s,.25s;
+}
+
+.vacancy::after{
+  transition-duration:.24s;
+}
+
+.vacancy-main strong,
+.vacancy-main em,
+.vacancy-pay,
+.vacancy-arrow{
+  transition-duration:.24s;
+}
+
+.living-shot img{
+  transition-duration:.55s,.3s;
+}
+
+.logo-track{
+  animation-duration:18s;
+}
+
+.toast{
+  transition-duration:.22s;
+}
+
+.reveal{
+  transform:translateY(22px);
+  transition-duration:.55s;
+}
+
+@media(max-width:760px){
+  .reveal{
+    transform:translateY(16px);
+    transition-duration:.45s;
+  }
+}
