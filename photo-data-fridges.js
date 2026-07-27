@@ -1,0 +1,1 @@
+window.SKBS_PHOTOS=window.SKBS_PHOTOS||{};
