@@ -1,0 +1,1 @@
+window.SKBS_PHOTOS=window.SKBS_PHOTOS||{};window.SKBS_PHOTO_CHUNKS=window.SKBS_PHOTO_CHUNKS||{};if(window.SKBS_PHOTO_CHUNKS.room){window.SKBS_PHOTOS['hotel-room']='data:image/webp;base64,'+window.SKBS_PHOTO_CHUNKS.room;}
