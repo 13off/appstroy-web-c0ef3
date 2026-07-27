@@ -4,13 +4,13 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
   <meta name="theme-color" content="#080808">
-  <meta name="description" content="Работа вахтой в Мурманске на строительстве кафедрального собора. 6000 ₽ за смену, проживание, питание и оплачиваемые билеты.">
+  <meta name="description" content="Работа вахтой в Мурманске на строительстве кафедрального собора. Актуальные вакансии, проживание, питание и оплачиваемые билеты.">
   <title>СКБС — работа вахтой в Мурманске</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
-  <link rel="stylesheet" href="final.css?v=appstroy-1">
+  <link rel="stylesheet" href="final.css?v=vacancies-2">
 </head>
 <body>
   <header class="header">
@@ -29,9 +29,9 @@
       <div class="hero-content">
         <span class="status"><i></i> Мурманск · набор открыт</span>
         <h1>Кафедральный<br>собор в Мурманске</h1>
-        <p class="hero-line">6 000 ₽ за смену · проживание · питание · билеты</p>
+        <p class="hero-line">4 вакансии · проживание · питание · оплачиваемые билеты</p>
         <div class="hero-actions">
-          <a class="button button-gold" href="#vacancies">Смотреть вакансию</a>
+          <a class="button button-gold" href="#vacancies">Смотреть вакансии</a>
           <a class="button button-dark" href="#apply">Оставить заявку</a>
         </div>
       </div>
@@ -39,43 +39,90 @@
     </section>
 
     <section class="section vacancies" id="vacancies">
-      <div class="section-head"><div><span class="kicker">Объекты</span><h2>Вакансии</h2></div></div>
+      <div class="section-head"><div><span class="kicker">Мурманск · кафедральный собор</span><h2>Вакансии</h2></div></div>
       <div class="vacancy-list">
-        <article class="vacancy">
+        <article class="vacancy is-selected" data-vacancy-key="concrete">
           <button class="vacancy-trigger" type="button" aria-expanded="false">
-            <span class="vacancy-main"><small>Набор открыт</small><strong>Мурманск</strong><em>Бетонщик-арматурщик</em></span>
-            <span class="vacancy-pay">6 000 ₽<small>/ смена</small></span><span class="plus" aria-hidden="true"></span>
+            <span class="vacancy-main"><small>Набор открыт</small><strong>Бетонщик-арматурщик</strong><em>Монолитные работы на объекте</em></span>
+            <span class="vacancy-pay">180–230 тыс. ₽<small>/ вахтовый месяц</small></span><span class="plus" aria-hidden="true"></span>
           </button>
           <div class="vacancy-panel" hidden>
-            <div class="vacancy-photo"><img src="assets/hero-dc24977.webp" alt="Проект кафедрального собора в Мурманске"></div>
+            <div class="vacancy-photo"><img src="assets/hero-dc24977.webp" alt="Строительство кафедрального собора в Мурманске"></div>
             <div class="details">
               <div><span>Объект</span><b>Кафедральный собор</b><small>Центр Мурманска</small></div>
               <div><span>График</span><b>08:00–19:00</b><small>Обед 12:00–13:00, перерывы на чай</small></div>
               <div><span>Вахта</span><b>От 2 месяцев</b></div>
-              <div><span>Ставка</span><b>6 000 ₽ / смена</b></div>
+              <div><span>Оплата</span><b>180 000–230 000 ₽</b><small>За вахтовый месяц</small></div>
               <div><span>Проживание</span><b>Чистая гостиница</b><small>2–3 человека, 15 минут до объекта</small></div>
               <div><span>Питание</span><b>Трёхразовое</b><small>Завтрак и ужин — в гостиницу, обед — на объект</small></div>
               <div><span>Выплаты</span><b>30-го аванс</b><small>15-го — зарплата за прошлый месяц</small></div>
               <div><span>Билеты</span><b>Оплачиваются</b></div>
             </div>
-            <a class="button button-gold vacancy-apply" href="#apply">Откликнуться</a>
+            <a class="button button-gold vacancy-apply" href="#apply" data-vacancy-key="concrete" data-vacancy-title="Бетонщик-арматурщик">Откликнуться на вакансию</a>
           </div>
         </article>
 
-        <article class="vacancy is-soon">
+        <article class="vacancy" data-vacancy-key="general">
           <button class="vacancy-trigger" type="button" aria-expanded="false">
-            <span class="vacancy-main"><small>Скоро</small><strong>Москва</strong><em>Объект и условия добавим позже</em></span>
-            <span class="vacancy-pay muted">—</span><span class="plus" aria-hidden="true"></span>
+            <span class="vacancy-main"><small>Набор открыт</small><strong>Разнорабочий</strong><em>Помощь бригадам и работы на объекте</em></span>
+            <span class="vacancy-pay">5 000 ₽<small>/ смена</small></span><span class="plus" aria-hidden="true"></span>
           </button>
-          <div class="vacancy-panel vacancy-panel-soon" hidden><p>Набор пока не открыт.</p></div>
+          <div class="vacancy-panel" hidden>
+            <div class="vacancy-photo"><img src="assets/hero-dc24977.webp" alt="Строительный объект в Мурманске"></div>
+            <div class="details">
+              <div><span>Объект</span><b>Кафедральный собор</b><small>Центр Мурманска</small></div>
+              <div><span>График</span><b>08:00–19:00</b><small>Обед 12:00–13:00, перерывы на чай</small></div>
+              <div><span>Вахта</span><b>От 2 месяцев</b></div>
+              <div><span>Оплата</span><b>5 000 ₽ / смена</b></div>
+              <div><span>Проживание</span><b>Чистая гостиница</b><small>2–3 человека, 15 минут до объекта</small></div>
+              <div><span>Питание</span><b>Трёхразовое</b><small>Завтрак и ужин — в гостиницу, обед — на объект</small></div>
+              <div><span>Выплаты</span><b>30-го аванс</b><small>15-го — зарплата за прошлый месяц</small></div>
+              <div><span>Билеты</span><b>Оплачиваются</b></div>
+            </div>
+            <a class="button button-gold vacancy-apply" href="#apply" data-vacancy-key="general" data-vacancy-title="Разнорабочий">Откликнуться на вакансию</a>
+          </div>
         </article>
 
-        <article class="vacancy is-soon">
+        <article class="vacancy" data-vacancy-key="foreman">
           <button class="vacancy-trigger" type="button" aria-expanded="false">
-            <span class="vacancy-main"><small>Скоро</small><strong>Забайкалье</strong><em>Медный завод</em></span>
-            <span class="vacancy-pay muted">—</span><span class="plus" aria-hidden="true"></span>
+            <span class="vacancy-main"><small>Набор открыт</small><strong>Мастер-прораб</strong><em>Организация работ и управление бригадами</em></span>
+            <span class="vacancy-pay">200–250 тыс. ₽<small>/ вахтовый месяц</small></span><span class="plus" aria-hidden="true"></span>
           </button>
-          <div class="vacancy-panel vacancy-panel-soon" hidden><p>Условия и дата заезда появятся после открытия набора.</p></div>
+          <div class="vacancy-panel" hidden>
+            <div class="vacancy-photo"><img src="assets/hero-dc24977.webp" alt="Строительство кафедрального собора в Мурманске"></div>
+            <div class="details">
+              <div><span>Объект</span><b>Кафедральный собор</b><small>Центр Мурманска</small></div>
+              <div><span>Задачи</span><b>Организация работ</b><small>Контроль бригад, сроков и качества</small></div>
+              <div><span>Вахта</span><b>От 2 месяцев</b></div>
+              <div><span>Оплата</span><b>200 000–250 000 ₽</b><small>За вахтовый месяц</small></div>
+              <div><span>Проживание</span><b>Предоставляется</b></div>
+              <div><span>Питание</span><b>Предоставляется</b></div>
+              <div><span>Условия</span><b>Обсуждаются с HR</b><small>После рассмотрения опыта</small></div>
+              <div><span>Билеты</span><b>Оплачиваются</b></div>
+            </div>
+            <a class="button button-gold vacancy-apply" href="#apply" data-vacancy-key="foreman" data-vacancy-title="Мастер-прораб">Откликнуться на вакансию</a>
+          </div>
+        </article>
+
+        <article class="vacancy" data-vacancy-key="site_manager">
+          <button class="vacancy-trigger" type="button" aria-expanded="false">
+            <span class="vacancy-main"><small>Набор открыт</small><strong>Начальник участка</strong><em>Руководство строительным участком</em></span>
+            <span class="vacancy-pay">250–300 тыс. ₽<small>/ вахтовый месяц</small></span><span class="plus" aria-hidden="true"></span>
+          </button>
+          <div class="vacancy-panel" hidden>
+            <div class="vacancy-photo"><img src="assets/hero-dc24977.webp" alt="Строительный объект в центре Мурманска"></div>
+            <div class="details">
+              <div><span>Объект</span><b>Кафедральный собор</b><small>Центр Мурманска</small></div>
+              <div><span>Задачи</span><b>Управление участком</b><small>Люди, сроки, качество и производственный план</small></div>
+              <div><span>Вахта</span><b>От 2 месяцев</b></div>
+              <div><span>Оплата</span><b>250 000–300 000 ₽</b><small>За вахтовый месяц</small></div>
+              <div><span>Проживание</span><b>Предоставляется</b></div>
+              <div><span>Питание</span><b>Предоставляется</b></div>
+              <div><span>Условия</span><b>Обсуждаются с HR</b><small>После рассмотрения опыта</small></div>
+              <div><span>Билеты</span><b>Оплачиваются</b></div>
+            </div>
+            <a class="button button-gold vacancy-apply" href="#apply" data-vacancy-key="site_manager" data-vacancy-title="Начальник участка">Откликнуться на вакансию</a>
+          </div>
         </article>
       </div>
     </section>
@@ -101,14 +148,15 @@
     </section>
 
     <section class="section apply" id="apply">
-      <div class="apply-copy"><span class="kicker">Отклик</span><h2>Готовы на вахту?</h2><p>Заполните короткую анкету. После отправки заявка сразу появится в кадровой CRM AppСтрой.</p></div>
+      <div class="apply-copy"><span class="kicker">Отклик</span><h2>Готовы на вахту?</h2><p>Выберите вакансию и заполните короткую анкету. После отправки заявка сразу появится в кадровой CRM AppСтрой.</p></div>
       <form class="form" id="application-form">
-        <input type="hidden" id="object-field" value="Мурманск — кафедральный собор">
+        <input type="hidden" id="vacancy-key" value="concrete">
+        <div class="selected-vacancy form-wide" aria-live="polite"><span>Выбранная вакансия</span><strong id="selected-vacancy-title">Бетонщик-арматурщик</strong><a href="#vacancies">Изменить</a></div>
         <label><span>ФИО</span><input type="text" id="full-name" autocomplete="name" placeholder="Иван Иванов" maxlength="160" required></label>
         <label><span>Телефон</span><input type="tel" id="phone" autocomplete="tel" inputmode="tel" placeholder="+7 999 000-00-00" maxlength="30" required></label>
         <label><span>Город</span><input type="text" id="city" autocomplete="address-level2" placeholder="Ваш город" maxlength="160" required></label>
         <label><span>Опыт</span><select id="experience" required><option value="" selected disabled>Выберите</option><option>Без опыта</option><option>До 1 года</option><option>1–3 года</option><option>Более 3 лет</option></select></label>
-        <label class="form-wide"><span>Комментарий</span><textarea id="comment" rows="3" maxlength="2000" placeholder="Разряд и когда готовы выехать"></textarea></label>
+        <label class="form-wide"><span>Комментарий</span><textarea id="comment" rows="3" maxlength="2000" placeholder="Разряд, опыт и когда готовы выехать"></textarea></label>
         <label class="hp-field" aria-hidden="true"><span>Сайт</span><input type="text" id="website" tabindex="-1" autocomplete="off"></label>
         <label class="consent form-wide"><input type="checkbox" id="consent" required><span>Согласен на обработку данных. <a href="privacy.html" target="_blank">Политика</a></span></label>
         <button class="button button-gold form-wide" id="submit-application" type="submit">Отправить заявку</button>
@@ -121,6 +169,6 @@
 
   <dialog class="lightbox" aria-label="Просмотр фотографии"><button class="lightbox-close" type="button" aria-label="Закрыть">×</button><img src="" alt=""></dialog>
   <div class="toast" role="status" aria-live="polite"></div>
-  <script src="script.js?v=appstroy-1"></script>
+  <script src="script.js?v=vacancies-2"></script>
 </body>
 </html>
