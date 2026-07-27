@@ -43,13 +43,55 @@
   });
   selectVacancy(vacancyKeyField?.value || 'concrete');
 
+  const setPhotoScene = (scene) => {
+    document.body.classList.remove('photo-object', 'photo-room', 'photo-corridor');
+    document.body.classList.add(`photo-${scene || 'object'}`);
+  };
+
+  const sceneSections = [...document.querySelectorAll('[data-photo-scene]')];
+  const updatePhotoScene = () => {
+    const focusLine = window.innerHeight * 0.46;
+    let active = sceneSections[0];
+    let bestDistance = Number.POSITIVE_INFINITY;
+    sceneSections.forEach((section) => {
+      const rect = section.getBoundingClientRect();
+      const center = Math.max(rect.top, Math.min(focusLine, rect.bottom));
+      const distance = Math.abs(center - focusLine);
+      if (rect.bottom > 0 && rect.top < window.innerHeight && distance < bestDistance) {
+        active = section;
+        bestDistance = distance;
+      }
+    });
+    setPhotoScene(active?.dataset.photoScene || 'object');
+  };
+
+  let photoFrame = 0;
+  const requestPhotoUpdate = () => {
+    if (photoFrame) return;
+    photoFrame = window.requestAnimationFrame(() => {
+      photoFrame = 0;
+      updatePhotoScene();
+      const heroBg = document.querySelector('.hero-bg');
+      if (heroBg && window.matchMedia('(prefers-reduced-motion: no-preference)').matches) {
+        const offset = Math.min(window.scrollY * 0.12, 90);
+        heroBg.style.transform = `scale(1.035) translate3d(0, ${offset}px, 0)`;
+      }
+    });
+  };
+  window.addEventListener('scroll', requestPhotoUpdate, { passive: true });
+  window.addEventListener('resize', requestPhotoUpdate);
+  updatePhotoScene();
+
   const dialog = document.querySelector('.lightbox');
   const dialogImage = dialog?.querySelector('img');
-  document.querySelectorAll('.gallery-item img').forEach((image) => {
-    image.closest('button')?.addEventListener('click', () => {
+  document.querySelectorAll('.gallery-item').forEach((button) => {
+    button.addEventListener('click', () => {
       if (!dialog || !dialogImage) return;
-      dialogImage.src = image.src;
-      dialogImage.alt = image.alt;
+      const image = button.querySelector('img');
+      const source = button.dataset.gallerySrc || image?.src || '';
+      if (!source) return;
+      dialogImage.src = source;
+      dialogImage.alt = image?.alt || 'Фотография условий проживания';
       dialog.showModal();
     });
   });
