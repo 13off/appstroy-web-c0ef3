@@ -1,0 +1,1 @@
+window.SKBS_PHOTOS=window.SKBS_PHOTOS||{};window.SKBS_PHOTO_CHUNKS=window.SKBS_PHOTO_CHUNKS||{};if(window.SKBS_PHOTO_CHUNKS.fridges){window.SKBS_PHOTOS['hotel-fridges']='data:image/webp;base64,'+window.SKBS_PHOTO_CHUNKS.fridges;}
