@@ -1,8 +1,8 @@
 main{
   --scene-mix:0;
   --scene-visibility:1;
-  --scene-a-scale:1.025;
-  --scene-b-scale:1.055;
+  --scene-a-scale:1.02;
+  --scene-b-scale:1.045;
   position:relative;
   isolation:isolate;
   z-index:0;
@@ -12,28 +12,28 @@ main::before,
 main::after{
   content:"";
   position:fixed;
-  inset:-4%;
+  inset:-2.5%;
   z-index:0;
   pointer-events:none;
   background-repeat:no-repeat;
   background-size:cover;
-  will-change:opacity,transform,filter;
+  will-change:opacity,transform;
+  backface-visibility:hidden;
+  transform-origin:center;
 }
 
 main::before{
   background-image:url('https://dxbrhsefgxcaxzmrbfrb.supabase.co/functions/v1/site-background-image?kind=panorama');
   background-position:center center;
   opacity:calc(var(--scene-visibility) * (1 - var(--scene-mix)));
-  transform:scale(var(--scene-a-scale)) translate3d(0,calc(var(--scene-mix) * -1.2%),0);
-  filter:saturate(.86) contrast(1.04) brightness(.98);
+  transform:translate3d(0,calc(var(--scene-mix) * -1%),0) scale(var(--scene-a-scale));
 }
 
 main::after{
   background-image:url('https://dxbrhsefgxcaxzmrbfrb.supabase.co/functions/v1/site-background-image?kind=workers');
   background-position:54% center;
   opacity:calc(var(--scene-visibility) * var(--scene-mix));
-  transform:scale(var(--scene-b-scale)) translate3d(0,calc((1 - var(--scene-mix)) * 1.5%),0);
-  filter:saturate(.78) contrast(1.08) brightness(.92);
+  transform:translate3d(0,calc((1 - var(--scene-mix)) * 1.2%),0) scale(var(--scene-b-scale));
 }
 
 main>*,
@@ -71,9 +71,7 @@ main>*,
 }
 
 .vacancies{
-  background:
-    linear-gradient(180deg,rgba(13,13,11,.92) 0%,rgba(13,13,11,.84) 18%,rgba(13,13,11,.78) 72%,rgba(13,13,11,.7) 100%);
-  backdrop-filter:blur(1.5px);
+  background:linear-gradient(180deg,rgba(13,13,11,.95) 0%,rgba(13,13,11,.9) 18%,rgba(13,13,11,.84) 72%,rgba(13,13,11,.78) 100%);
 }
 
 .object-shade{
@@ -87,7 +85,7 @@ main>*,
 @media(max-width:760px){
   main::before{background-position:60% center}
   main::after{background-position:65% center}
-  .vacancies{background:rgba(13,13,11,.88)}
+  .vacancies{background:rgba(13,13,11,.92)}
 }
 
 @media(prefers-reduced-motion:reduce){
