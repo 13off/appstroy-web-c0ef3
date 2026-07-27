@@ -1,11 +1,6 @@
 (() => {
   'use strict';
 
-  const motionStyles = document.createElement('link');
-  motionStyles.rel = 'stylesheet';
-  motionStyles.href = 'motion-layer.css?v=smooth-scenes-1';
-  document.head.appendChild(motionStyles);
-
   const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   const canHover = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
   const vacancyTitles = {
@@ -31,14 +26,20 @@
   const objectStory = document.querySelector('.object-story');
   const livingSection = document.querySelector('.living');
 
+  let loadingFinished = false;
   const finishLoading = () => {
+    if (loadingFinished) return;
+    loadingFinished = true;
     body.classList.remove('is-loading');
     requestAnimationFrame(() => body.classList.add('is-ready'));
   };
 
-  if (document.readyState === 'complete') finishLoading();
-  else window.addEventListener('load', finishLoading, { once: true });
-  window.setTimeout(finishLoading, 1500);
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', finishLoading, { once: true });
+  } else {
+    finishLoading();
+  }
+  window.setTimeout(finishLoading, 450);
 
   const revealItems = [...document.querySelectorAll('[data-reveal]')];
   if (reduceMotion || !('IntersectionObserver' in window)) {
@@ -50,10 +51,10 @@
         entry.target.classList.add('is-visible');
         observer.unobserve(entry.target);
       });
-    }, { rootMargin: '0px 0px -9% 0px', threshold: 0.12 });
+    }, { rootMargin: '0px 0px -3% 0px', threshold: 0.08 });
 
     revealItems.forEach((item, index) => {
-      item.style.transitionDelay = `${Math.min(index % 4, 3) * 55}ms`;
+      item.style.transitionDelay = `${Math.min(index % 4, 3) * 25}ms`;
       revealObserver.observe(item);
     });
   }
@@ -72,23 +73,22 @@
       return;
     }
 
-    const transitionStart = hero.offsetTop + hero.offsetHeight * 0.36;
-    const transitionEnd = objectStory.offsetTop + viewport * 0.22;
+    const transitionStart = hero.offsetTop + hero.offsetHeight * 0.24;
+    const transitionEnd = objectStory.offsetTop - viewport * 0.08;
     const transitionDistance = Math.max(transitionEnd - transitionStart, 1);
-    const rawMix = (scrollY - transitionStart) / transitionDistance;
-    const sceneMix = smoothStep(rawMix);
+    const sceneMix = smoothStep((scrollY - transitionStart) / transitionDistance);
 
-    const fadeStart = objectStory.offsetTop + objectStory.offsetHeight * 0.72;
+    const fadeStart = objectStory.offsetTop + objectStory.offsetHeight * 0.62;
     const fadeEnd = livingSection
-      ? livingSection.offsetTop + viewport * 0.12
+      ? livingSection.offsetTop - viewport * 0.04
       : objectStory.offsetTop + objectStory.offsetHeight;
     const fadeDistance = Math.max(fadeEnd - fadeStart, 1);
     const sceneVisibility = 1 - smoothStep((scrollY - fadeStart) / fadeDistance);
 
     main.style.setProperty('--scene-mix', sceneMix.toFixed(4));
     main.style.setProperty('--scene-visibility', clamp(sceneVisibility, 0, 1).toFixed(4));
-    main.style.setProperty('--scene-a-scale', (1.035 + sceneMix * 0.055).toFixed(4));
-    main.style.setProperty('--scene-b-scale', (1.09 - sceneMix * 0.04).toFixed(4));
+    main.style.setProperty('--scene-a-scale', (1.02 + sceneMix * 0.035).toFixed(4));
+    main.style.setProperty('--scene-b-scale', (1.065 - sceneMix * 0.025).toFixed(4));
   };
 
   let scrollFrame = 0;
@@ -105,8 +105,8 @@
     if (!reduceMotion && hero && heroCopy) {
       const rect = hero.getBoundingClientRect();
       const localProgress = clamp(-rect.top / Math.max(rect.height, 1), 0, 1);
-      heroCopy.style.transform = `translate3d(0, ${localProgress * 38}px, 0)`;
-      heroCopy.style.opacity = String(1 - localProgress * 0.23);
+      heroCopy.style.transform = `translate3d(0, ${localProgress * 28}px, 0)`;
+      heroCopy.style.opacity = String(1 - localProgress * 0.15);
     }
 
     let activeSection = null;
@@ -150,9 +150,9 @@
     if (reduceMotion || !panel.animate) return;
     const height = panel.scrollHeight;
     await panel.animate([
-      { height: '0px', opacity: 0, transform: 'translateY(-12px)' },
+      { height: '0px', opacity: 0, transform: 'translateY(-8px)' },
       { height: `${height}px`, opacity: 1, transform: 'translateY(0)' }
-    ], { duration: 520, easing: 'cubic-bezier(.22,1,.36,1)' }).finished.catch(() => {});
+    ], { duration: 320, easing: 'cubic-bezier(.22,1,.36,1)' }).finished.catch(() => {});
     panel.style.height = 'auto';
   };
 
@@ -167,8 +167,8 @@
     const height = panel.getBoundingClientRect().height;
     await panel.animate([
       { height: `${height}px`, opacity: 1, transform: 'translateY(0)' },
-      { height: '0px', opacity: 0, transform: 'translateY(-10px)' }
-    ], { duration: 360, easing: 'cubic-bezier(.4,0,.2,1)' }).finished.catch(() => {});
+      { height: '0px', opacity: 0, transform: 'translateY(-6px)' }
+    ], { duration: 220, easing: 'cubic-bezier(.4,0,.2,1)' }).finished.catch(() => {});
     panel.hidden = true;
     panel.style.height = '';
   };
@@ -210,7 +210,7 @@
       return;
     }
     const start = performance.now();
-    const duration = 1050;
+    const duration = 650;
     const tick = (now) => {
       const elapsed = clamp((now - start) / duration, 0, 1);
       element.textContent = String(Math.round(target * easeOutCubic(elapsed)));
@@ -226,7 +226,7 @@
         animateCounter(entry.target);
         observer.unobserve(entry.target);
       });
-    }, { threshold: 0.55 });
+    }, { threshold: 0.42 });
     counters.forEach((counter) => counterObserver.observe(counter));
   } else counters.forEach(animateCounter);
 
@@ -253,8 +253,8 @@
     document.querySelectorAll('.magnetic').forEach((element) => {
       element.addEventListener('pointermove', (event) => {
         const rect = element.getBoundingClientRect();
-        const x = (event.clientX - rect.left - rect.width / 2) * 0.12;
-        const y = (event.clientY - rect.top - rect.height / 2) * 0.18;
+        const x = (event.clientX - rect.left - rect.width / 2) * 0.08;
+        const y = (event.clientY - rect.top - rect.height / 2) * 0.12;
         element.style.transform = `translate3d(${x}px, ${y}px, 0)`;
       });
       element.addEventListener('pointerleave', () => {
@@ -265,7 +265,7 @@
 
   const toast = document.querySelector('.toast');
   let toastTimer = 0;
-  const showToast = (text, duration = 5200) => {
+  const showToast = (text, duration = 4200) => {
     if (!toast) return;
     window.clearTimeout(toastTimer);
     toast.textContent = text;
@@ -328,7 +328,7 @@
 
       const number = data.number ? ` №${data.number}` : '';
       const title = vacancyTitles[payload.vacancyKey] || 'вакансию';
-      showToast(`Заявка${number} на вакансию «${title}» принята. Мы свяжемся с вами по телефону.`, 8000);
+      showToast(`Заявка${number} на вакансию «${title}» принята. Мы свяжемся с вами по телефону.`, 7000);
       form.reset();
       selectVacancy('concrete');
       formStartedAt = Date.now();
