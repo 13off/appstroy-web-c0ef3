@@ -33,8 +33,9 @@
   animation-duration:1.55s;
 }
 
-.ticker-track{
-  animation-duration:18s;
+.hero-facts,
+.ticker{
+  display:none!important;
 }
 
 .vacancy{
