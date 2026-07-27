@@ -5,6 +5,25 @@
     foreman: 'Мастер-прораб',
     site_manager: 'Начальник участка'
   };
+
+  const photos = globalThis.SKBS_PHOTOS || {};
+  const photoUrl = (key) => typeof photos[key] === 'string' ? photos[key] : '';
+
+  document.querySelectorAll('[data-photo-key]').forEach((element) => {
+    const key = element.dataset.photoKey || '';
+    const source = photoUrl(key);
+    if (!source) return;
+
+    if (element.classList.contains('page-photo-layer')) {
+      element.style.backgroundImage = `url("${source}")`;
+      return;
+    }
+
+    const image = element.matches('img') ? element : element.querySelector('img');
+    if (image) image.src = source;
+    if (element.matches('button')) element.dataset.gallerySrc = source;
+  });
+
   const vacancies = [...document.querySelectorAll('.vacancy')];
   const vacancyKeyField = document.querySelector('#vacancy-key');
   const selectedVacancyTitle = document.querySelector('#selected-vacancy-title');
@@ -43,9 +62,12 @@
   });
   selectVacancy(vacancyKeyField?.value || 'concrete');
 
+  const sceneClasses = ['photo-site-panorama', 'photo-site-workers', 'photo-room', 'photo-corridor'];
   const setPhotoScene = (scene) => {
-    document.body.classList.remove('photo-object', 'photo-room', 'photo-corridor');
-    document.body.classList.add(`photo-${scene || 'object'}`);
+    document.body.classList.remove(...sceneClasses);
+    const requestedClass = `photo-${scene || 'site-panorama'}`;
+    const activeClass = sceneClasses.includes(requestedClass) ? requestedClass : 'photo-site-panorama';
+    document.body.classList.add(activeClass);
   };
   const sceneSections = [...document.querySelectorAll('[data-photo-scene]')];
   const updatePhotoScene = () => {
@@ -61,7 +83,7 @@
         bestDistance = distance;
       }
     });
-    setPhotoScene(active?.dataset.photoScene || 'object');
+    setPhotoScene(active?.dataset.photoScene || 'site-panorama');
   };
   let photoFrame = 0;
   const requestPhotoUpdate = () => {
@@ -69,11 +91,6 @@
     photoFrame = window.requestAnimationFrame(() => {
       photoFrame = 0;
       updatePhotoScene();
-      const heroBg = document.querySelector('.hero-bg');
-      if (heroBg && window.matchMedia('(prefers-reduced-motion: no-preference)').matches) {
-        const offset = Math.min(window.scrollY * 0.12, 90);
-        heroBg.style.transform = `scale(1.035) translate3d(0, ${offset}px, 0)`;
-      }
     });
   };
   window.addEventListener('scroll', requestPhotoUpdate, { passive: true });
