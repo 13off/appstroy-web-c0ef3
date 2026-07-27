@@ -10,14 +10,14 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
-  <link rel="stylesheet" href="final.css?v=photos-3">
+  <link rel="stylesheet" href="final.css?v=photos-5">
 </head>
 <body>
   <div class="page-photo-bg" aria-hidden="true">
-    <div class="page-photo-layer page-photo-site-panorama" data-photo-key="site-panorama"></div>
-    <div class="page-photo-layer page-photo-site-workers" data-photo-key="site-workers"></div>
-    <div class="page-photo-layer page-photo-room" data-photo-key="hotel-room"></div>
-    <div class="page-photo-layer page-photo-corridor" data-photo-key="hotel-corridor"></div>
+    <div class="page-photo-layer page-photo-site-panorama" style="background-image:url('assets/hero-dc24977.webp')"></div>
+    <div class="page-photo-layer page-photo-site-workers" style="background-image:url('assets/hero-dc24977.webp')"></div>
+    <div class="page-photo-layer page-photo-room" style="background-image:url('assets/room-dc24977.webp')"></div>
+    <div class="page-photo-layer page-photo-corridor" style="background-image:url('assets/corridor-dc24977.webp')"></div>
   </div>
 
   <header class="header">
@@ -136,11 +136,11 @@
         <p>2–3 человека в комнате<br>15 минут до объекта</p>
       </div>
       <div class="gallery gallery-expanded">
-        <button class="gallery-item gallery-item-wide" type="button" data-photo-key="hotel-room">
+        <button class="gallery-item gallery-item-wide" type="button">
           <img src="assets/room-dc24977.webp" alt="Комната в гостинице">
           <span>Комната</span>
         </button>
-        <button class="gallery-item gallery-item-tall" type="button" data-photo-key="hotel-corridor">
+        <button class="gallery-item gallery-item-tall" type="button">
           <img src="assets/corridor-dc24977.webp" alt="Коридор гостиницы">
           <span>Коридор</span>
         </button>
@@ -190,13 +190,11 @@
 
   <dialog class="lightbox" aria-label="Просмотр фотографии"><button class="lightbox-close" type="button" aria-label="Закрыть">×</button><img src="" alt=""></dialog>
   <div class="toast" role="status" aria-live="polite"></div>
-  <script src="photo-data-room.js?v=photos-3"></script>
-  <script src="photo-data-corridor.js?v=photos-3"></script>
-  <script src="photo-data-toilet.js?v=photos-3"></script>
-  <script src="photo-data-fridges.js?v=photos-3"></script>
-  <script src="photo-data-shower.js?v=photos-3"></script>
-  <script src="photo-data-site-panorama.js?v=photos-3"></script>
-  <script src="photo-data-site-workers.js?v=photos-3"></script>
-  <script src="live.js?v=photos-3"></script>
+  <script src="photo-data-toilet.js?v=photos-5"></script>
+  <script src="photo-data-shower-fixed.js?v=photos-5"></script>
+  <script src="photo-chunks-v5/fridges-0.js?v=photos-5"></script>
+  <script src="photo-chunks-v5/fridges-1.js?v=photos-5"></script>
+  <script src="photo-chunks-v5/assemble.js?v=photos-5"></script>
+  <script src="live.js?v=photos-5"></script>
 </body>
 </html>
