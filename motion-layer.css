@@ -1,8 +1,8 @@
 main{
   --scene-mix:0;
   --scene-visibility:1;
-  --scene-a-scale:1.035;
-  --scene-b-scale:1.075;
+  --scene-a-scale:1.025;
+  --scene-b-scale:1.055;
   position:relative;
   isolation:isolate;
   z-index:0;
@@ -12,65 +12,82 @@ main::before,
 main::after{
   content:"";
   position:fixed;
-  inset:-3.5%;
-  z-index:-10;
+  inset:-4%;
+  z-index:0;
   pointer-events:none;
-  background-image:url('assets/hero-dc24977.webp');
   background-repeat:no-repeat;
   background-size:cover;
   will-change:opacity,transform,filter;
 }
 
 main::before{
+  background-image:url('https://dxbrhsefgxcaxzmrbfrb.supabase.co/functions/v1/site-background-image?kind=panorama');
   background-position:center center;
   opacity:calc(var(--scene-visibility) * (1 - var(--scene-mix)));
-  transform:scale(var(--scene-a-scale)) translate3d(0,calc(var(--scene-mix) * -1.8%),0);
-  filter:saturate(.82) contrast(1.06) brightness(.98);
+  transform:scale(var(--scene-a-scale)) translate3d(0,calc(var(--scene-mix) * -1.2%),0);
+  filter:saturate(.86) contrast(1.04) brightness(.98);
 }
 
 main::after{
-  background-position:58% center;
+  background-image:url('https://dxbrhsefgxcaxzmrbfrb.supabase.co/functions/v1/site-background-image?kind=workers');
+  background-position:54% center;
   opacity:calc(var(--scene-visibility) * var(--scene-mix));
-  transform:scale(var(--scene-b-scale)) translate3d(0,calc((1 - var(--scene-mix)) * 2.2%),0);
-  filter:saturate(.68) contrast(1.12) brightness(.9);
+  transform:scale(var(--scene-b-scale)) translate3d(0,calc((1 - var(--scene-mix)) * 1.5%),0);
+  filter:saturate(.78) contrast(1.08) brightness(.92);
+}
+
+main>*,
+.site-header,
+.footer{
+  position:relative;
+  z-index:1;
 }
 
 .hero-media,
 .object-media{
-  opacity:0!important;
-  visibility:hidden!important;
-  pointer-events:none!important;
+  display:none!important;
 }
 
 .hero,
 .object-story{
-  background:transparent;
+  background:transparent!important;
 }
 
 .hero-shade{
-  z-index:-2;
+  z-index:1;
+  pointer-events:none;
   background:
-    linear-gradient(90deg,rgba(5,5,4,.93) 0%,rgba(5,5,4,.74) 38%,rgba(5,5,4,.23) 74%,rgba(5,5,4,.47) 100%),
-    linear-gradient(180deg,rgba(0,0,0,.1),rgba(0,0,0,.04) 48%,rgba(8,8,7,.88) 100%);
+    linear-gradient(90deg,rgba(5,5,4,.91) 0%,rgba(5,5,4,.72) 38%,rgba(5,5,4,.2) 74%,rgba(5,5,4,.43) 100%),
+    linear-gradient(180deg,rgba(0,0,0,.08),rgba(0,0,0,.02) 48%,rgba(8,8,7,.84) 100%);
+}
+
+.hero-grid,
+.hero-copy,
+.hero-facts,
+.scroll-cue,
+.object-content{
+  position:relative;
+  z-index:2;
 }
 
 .vacancies{
   background:
-    linear-gradient(180deg,rgba(13,13,11,.96) 0%,rgba(13,13,11,.88) 18%,rgba(13,13,11,.84) 70%,rgba(13,13,11,.76) 100%);
-  backdrop-filter:blur(2px);
+    linear-gradient(180deg,rgba(13,13,11,.92) 0%,rgba(13,13,11,.84) 18%,rgba(13,13,11,.78) 72%,rgba(13,13,11,.7) 100%);
+  backdrop-filter:blur(1.5px);
 }
 
 .object-shade{
-  z-index:-2;
+  z-index:1;
+  pointer-events:none;
   background:
-    linear-gradient(90deg,rgba(5,5,4,.92),rgba(5,5,4,.55) 58%,rgba(5,5,4,.18)),
-    linear-gradient(180deg,rgba(8,8,7,.55),rgba(8,8,7,.04) 28%,rgba(8,8,7,.7) 100%);
+    linear-gradient(90deg,rgba(5,5,4,.9),rgba(5,5,4,.5) 58%,rgba(5,5,4,.14)),
+    linear-gradient(180deg,rgba(8,8,7,.36),rgba(8,8,7,.02) 28%,rgba(8,8,7,.66) 100%);
 }
 
 @media(max-width:760px){
-  main::before{background-position:61% center}
-  main::after{background-position:67% center}
-  .vacancies{background:rgba(13,13,11,.92)}
+  main::before{background-position:60% center}
+  main::after{background-position:65% center}
+  .vacancies{background:rgba(13,13,11,.88)}
 }
 
 @media(prefers-reduced-motion:reduce){
