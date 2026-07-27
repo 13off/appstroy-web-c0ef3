@@ -10,13 +10,14 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
-  <link rel="stylesheet" href="final.css?v=vacancy-hover-2">
+  <link rel="stylesheet" href="final.css?v=photos-3">
 </head>
 <body>
   <div class="page-photo-bg" aria-hidden="true">
-    <div class="page-photo-layer page-photo-object"></div>
-    <div class="page-photo-layer page-photo-room"></div>
-    <div class="page-photo-layer page-photo-corridor"></div>
+    <div class="page-photo-layer page-photo-site-panorama" data-photo-key="site-panorama"></div>
+    <div class="page-photo-layer page-photo-site-workers" data-photo-key="site-workers"></div>
+    <div class="page-photo-layer page-photo-room" data-photo-key="hotel-room"></div>
+    <div class="page-photo-layer page-photo-corridor" data-photo-key="hotel-corridor"></div>
   </div>
 
   <header class="header">
@@ -30,7 +31,7 @@
   </header>
 
   <main id="top">
-    <section class="hero" data-photo-scene="object">
+    <section class="hero" data-photo-scene="site-panorama">
       <div class="hero-bg" aria-hidden="true"></div>
       <div class="hero-content">
         <span class="status"><i></i> Мурманск · набор открыт</span>
@@ -44,7 +45,7 @@
       <div class="hero-meta"><span>Центр города</span><span>Вахта от 2 месяцев</span><span>08:00–19:00</span></div>
     </section>
 
-    <section class="section vacancies" id="vacancies" data-photo-scene="object">
+    <section class="section vacancies" id="vacancies" data-photo-scene="site-workers">
       <div class="section-head"><div><span class="kicker">Мурманск · кафедральный собор</span><h2>Вакансии</h2></div></div>
       <div class="vacancy-list">
         <article class="vacancy is-selected" data-vacancy-key="concrete">
@@ -134,13 +135,27 @@
         <div><span class="kicker">Проживание</span><h2>Чисто и рядом</h2></div>
         <p>2–3 человека в комнате<br>15 минут до объекта</p>
       </div>
-      <div class="gallery gallery-expanded gallery-no-labels">
-        <button class="gallery-item gallery-item-wide" type="button" data-gallery-src="assets/room-dc24977.webp"><img src="assets/room-dc24977.webp" alt="Комната в гостинице"></button>
-        <button class="gallery-item gallery-item-tall" type="button" data-gallery-src="assets/corridor-dc24977.webp"><img src="assets/corridor-dc24977.webp" alt="Коридор гостиницы"></button>
-        <button class="gallery-item gallery-detail gallery-room-left" type="button" data-gallery-src="assets/room-dc24977.webp" aria-label="Открыть фотографию спальных мест"><img src="assets/room-dc24977.webp" alt="Спальные места в комнате"></button>
-        <button class="gallery-item gallery-detail gallery-room-right" type="button" data-gallery-src="assets/room-dc24977.webp" aria-label="Открыть фотографию комнаты у окна"><img src="assets/room-dc24977.webp" alt="Комната у окна"></button>
-        <button class="gallery-item gallery-detail gallery-corridor-near" type="button" data-gallery-src="assets/corridor-dc24977.webp" aria-label="Открыть ближний вид коридора"><img src="assets/corridor-dc24977.webp" alt="Ближний вид коридора"></button>
-        <button class="gallery-item gallery-detail gallery-corridor-far" type="button" data-gallery-src="assets/corridor-dc24977.webp" aria-label="Открыть общий вид гостиницы"><img src="assets/corridor-dc24977.webp" alt="Общий вид коридора гостиницы"></button>
+      <div class="gallery gallery-expanded">
+        <button class="gallery-item gallery-item-wide" type="button" data-photo-key="hotel-room">
+          <img src="assets/room-dc24977.webp" alt="Комната в гостинице">
+          <span>Комната</span>
+        </button>
+        <button class="gallery-item gallery-item-tall" type="button" data-photo-key="hotel-corridor">
+          <img src="assets/corridor-dc24977.webp" alt="Коридор гостиницы">
+          <span>Коридор</span>
+        </button>
+        <button class="gallery-item gallery-detail" type="button" data-photo-key="hotel-shower">
+          <img loading="lazy" src="assets/room-dc24977.webp" alt="Душевая">
+          <span>Душевая</span>
+        </button>
+        <button class="gallery-item gallery-detail" type="button" data-photo-key="hotel-toilet">
+          <img loading="lazy" src="assets/corridor-dc24977.webp" alt="Санузел">
+          <span>Санузел</span>
+        </button>
+        <button class="gallery-item gallery-detail" type="button" data-photo-key="hotel-fridges">
+          <img loading="lazy" src="assets/room-dc24977.webp" alt="Холодильники и бытовая зона">
+          <span>Бытовая зона</span>
+        </button>
       </div>
     </section>
 
@@ -153,7 +168,7 @@
       </div>
     </section>
 
-    <section class="section apply" id="apply" data-photo-scene="object">
+    <section class="section apply" id="apply" data-photo-scene="site-panorama">
       <div class="apply-copy"><span class="kicker">Отклик</span><h2>Готовы на вахту?</h2><p>Выберите вакансию и заполните короткую анкету. После отправки заявка сразу появится в кадровой CRM AppСтрой.</p></div>
       <form class="form" id="application-form">
         <input type="hidden" id="vacancy-key" value="concrete">
@@ -175,6 +190,13 @@
 
   <dialog class="lightbox" aria-label="Просмотр фотографии"><button class="lightbox-close" type="button" aria-label="Закрыть">×</button><img src="" alt=""></dialog>
   <div class="toast" role="status" aria-live="polite"></div>
-  <script src="live.js"></script>
+  <script src="photo-data-room.js?v=photos-3"></script>
+  <script src="photo-data-corridor.js?v=photos-3"></script>
+  <script src="photo-data-toilet.js?v=photos-3"></script>
+  <script src="photo-data-fridges.js?v=photos-3"></script>
+  <script src="photo-data-shower.js?v=photos-3"></script>
+  <script src="photo-data-site-panorama.js?v=photos-3"></script>
+  <script src="photo-data-site-workers.js?v=photos-3"></script>
+  <script src="live.js?v=photos-3"></script>
 </body>
 </html>
