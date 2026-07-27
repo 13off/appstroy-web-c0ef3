@@ -3,172 +3,269 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-  <meta name="theme-color" content="#080808">
-  <meta name="description" content="Работа вахтой в Мурманске на строительстве кафедрального собора. Актуальные вакансии, проживание, питание и оплачиваемые билеты.">
+  <meta name="theme-color" content="#080807">
+  <meta name="description" content="Работа вахтой в Мурманске на строительстве кафедрального собора. Проживание, питание, оплачиваемые билеты и официальная заявка.">
   <title>СКБС — работа вахтой в Мурманске</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css">
-  <link rel="stylesheet" href="final.css?v=vacancies-2">
+  <link rel="stylesheet" href="final.css?v=premium-motion-1">
 </head>
-<body>
-  <header class="header">
-    <a class="wordmark" href="#top">СКБС</a>
-    <nav class="nav" aria-label="Навигация">
+<body class="is-loading">
+  <div class="page-progress" aria-hidden="true"><i></i></div>
+
+  <header class="site-header" data-header>
+    <a class="brand" href="#top" aria-label="СКБС — наверх">
+      <span class="brand-mark">С</span><span>СКБС</span>
+    </a>
+    <nav class="site-nav" aria-label="Навигация">
       <a href="#vacancies">Вакансии</a>
       <a href="#living">Проживание</a>
-      <a href="#partners">Партнёры</a>
+      <a href="#about">Объект</a>
     </nav>
-    <a class="mini-cta" href="#apply">Откликнуться</a>
+    <a class="header-cta magnetic" href="#apply"><span>Откликнуться</span></a>
   </header>
 
   <main id="top">
-    <section class="hero">
-      <div class="hero-bg" aria-hidden="true"></div>
-      <div class="hero-content">
-        <span class="status"><i></i> Мурманск · набор открыт</span>
-        <h1>Кафедральный<br>собор в Мурманске</h1>
-        <p class="hero-line">4 вакансии · проживание · питание · оплачиваемые билеты</p>
-        <div class="hero-actions">
-          <a class="button button-gold" href="#vacancies">Смотреть вакансии</a>
-          <a class="button button-dark" href="#apply">Оставить заявку</a>
+    <section class="hero" data-hero>
+      <figure class="hero-media" aria-hidden="true">
+        <img src="assets/hero-dc24977.webp" alt="" fetchpriority="high" decoding="async">
+      </figure>
+      <div class="hero-shade" aria-hidden="true"></div>
+      <div class="hero-grid" aria-hidden="true"></div>
+
+      <div class="hero-copy">
+        <div class="eyebrow reveal" data-reveal>
+          <span class="live-dot"></span>
+          Мурманск · набор открыт
+        </div>
+        <h1 class="hero-title" aria-label="Строим собор. Собираем сильную команду.">
+          <span class="title-line"><span>Строим собор.</span></span>
+          <span class="title-line title-line-muted"><span>Собираем сильную</span></span>
+          <span class="title-line"><span>команду.</span></span>
+        </h1>
+        <div class="hero-bottom reveal" data-reveal>
+          <p>Работа вахтой на крупном объекте в центре Мурманска. Проживание, трёхразовое питание и билеты оплачивает компания.</p>
+          <div class="hero-actions">
+            <a class="button button-primary magnetic" href="#vacancies"><span>Выбрать вакансию</span><i>↘</i></a>
+            <a class="button button-ghost magnetic" href="#living"><span>Условия проживания</span></a>
+          </div>
         </div>
       </div>
-      <div class="hero-meta"><span>Центр города</span><span>Вахта от 2 месяцев</span><span>08:00–19:00</span></div>
+
+      <aside class="hero-facts reveal" data-reveal aria-label="Ключевые условия">
+        <div><small>Оплата</small><b>до 300 000 ₽</b></div>
+        <div><small>Вахта</small><b>от 2 месяцев</b></div>
+        <div><small>Объект</small><b>центр Мурманска</b></div>
+      </aside>
+
+      <div class="scroll-cue" aria-hidden="true"><span>Листайте</span><i></i></div>
     </section>
 
-    <section class="section vacancies" id="vacancies">
-      <div class="section-head"><div><span class="kicker">Мурманск · кафедральный собор</span><h2>Вакансии</h2></div></div>
-      <div class="vacancy-list">
-        <article class="vacancy is-selected" data-vacancy-key="concrete">
+    <div class="ticker" aria-hidden="true">
+      <div class="ticker-track">
+        <span>Проживание</span><i>✦</i><span>Питание</span><i>✦</i><span>Оплачиваемые билеты</span><i>✦</i><span>Стабильные выплаты</span><i>✦</i>
+        <span>Проживание</span><i>✦</i><span>Питание</span><i>✦</i><span>Оплачиваемые билеты</span><i>✦</i><span>Стабильные выплаты</span><i>✦</i>
+      </div>
+    </div>
+
+    <section class="vacancies section" id="vacancies">
+      <div class="section-intro sticky-intro">
+        <span class="section-number reveal" data-reveal>01 / Вакансии</span>
+        <h2 class="reveal" data-reveal>Выберите свою роль<br>на большом объекте</h2>
+        <p class="reveal" data-reveal>Нажмите на профессию, чтобы посмотреть условия. Фотографий и лишней рекламы внутри карточек нет — только конкретика.</p>
+      </div>
+
+      <div class="vacancy-list" data-vacancy-list>
+        <article class="vacancy is-selected reveal" data-reveal data-vacancy-key="concrete">
           <button class="vacancy-trigger" type="button" aria-expanded="false">
-            <span class="vacancy-main"><small>Набор открыт</small><strong>Бетонщик-арматурщик</strong><em>Монолитные работы на объекте</em></span>
-            <span class="vacancy-pay">180–230 тыс. ₽<small>/ вахтовый месяц</small></span><span class="plus" aria-hidden="true"></span>
+            <span class="vacancy-index">01</span>
+            <span class="vacancy-main"><small>Набор открыт</small><strong>Бетонщик-арматурщик</strong><em>Монолитные работы</em></span>
+            <span class="vacancy-pay">180–230 тыс. ₽<small>за вахтовый месяц</small></span>
+            <span class="vacancy-arrow" aria-hidden="true">↘</span>
           </button>
           <div class="vacancy-panel" hidden>
-            <div class="vacancy-photo"><img src="assets/hero-dc24977.webp" alt="Строительство кафедрального собора в Мурманске"></div>
             <div class="details">
               <div><span>Объект</span><b>Кафедральный собор</b><small>Центр Мурманска</small></div>
-              <div><span>График</span><b>08:00–19:00</b><small>Обед 12:00–13:00, перерывы на чай</small></div>
+              <div><span>График</span><b>08:00–19:00</b><small>Обед 12:00–13:00</small></div>
               <div><span>Вахта</span><b>От 2 месяцев</b></div>
               <div><span>Оплата</span><b>180 000–230 000 ₽</b><small>За вахтовый месяц</small></div>
-              <div><span>Проживание</span><b>Чистая гостиница</b><small>2–3 человека, 15 минут до объекта</small></div>
-              <div><span>Питание</span><b>Трёхразовое</b><small>Завтрак и ужин — в гостиницу, обед — на объект</small></div>
-              <div><span>Выплаты</span><b>30-го аванс</b><small>15-го — зарплата за прошлый месяц</small></div>
+              <div><span>Проживание</span><b>Гостиница</b><small>2–3 человека в комнате</small></div>
+              <div><span>Питание</span><b>Трёхразовое</b><small>Доставка на объект и в гостиницу</small></div>
+              <div><span>Выплаты</span><b>30-го аванс</b><small>15-го — зарплата</small></div>
               <div><span>Билеты</span><b>Оплачиваются</b></div>
             </div>
-            <a class="button button-gold vacancy-apply" href="#apply" data-vacancy-key="concrete" data-vacancy-title="Бетонщик-арматурщик">Откликнуться на вакансию</a>
+            <a class="button button-primary vacancy-apply magnetic" href="#apply" data-vacancy-key="concrete" data-vacancy-title="Бетонщик-арматурщик"><span>Откликнуться</span><i>↘</i></a>
           </div>
         </article>
 
-        <article class="vacancy" data-vacancy-key="general">
+        <article class="vacancy reveal" data-reveal data-vacancy-key="general">
           <button class="vacancy-trigger" type="button" aria-expanded="false">
-            <span class="vacancy-main"><small>Набор открыт</small><strong>Разнорабочий</strong><em>Помощь бригадам и работы на объекте</em></span>
-            <span class="vacancy-pay">5 000 ₽<small>/ смена</small></span><span class="plus" aria-hidden="true"></span>
+            <span class="vacancy-index">02</span>
+            <span class="vacancy-main"><small>Набор открыт</small><strong>Разнорабочий</strong><em>Помощь строительным бригадам</em></span>
+            <span class="vacancy-pay">5 000 ₽<small>за смену</small></span>
+            <span class="vacancy-arrow" aria-hidden="true">↘</span>
           </button>
           <div class="vacancy-panel" hidden>
-            <div class="vacancy-photo"><img src="assets/hero-dc24977.webp" alt="Строительный объект в Мурманске"></div>
             <div class="details">
               <div><span>Объект</span><b>Кафедральный собор</b><small>Центр Мурманска</small></div>
-              <div><span>График</span><b>08:00–19:00</b><small>Обед 12:00–13:00, перерывы на чай</small></div>
+              <div><span>График</span><b>08:00–19:00</b><small>Обед 12:00–13:00</small></div>
               <div><span>Вахта</span><b>От 2 месяцев</b></div>
               <div><span>Оплата</span><b>5 000 ₽ / смена</b></div>
-              <div><span>Проживание</span><b>Чистая гостиница</b><small>2–3 человека, 15 минут до объекта</small></div>
-              <div><span>Питание</span><b>Трёхразовое</b><small>Завтрак и ужин — в гостиницу, обед — на объект</small></div>
-              <div><span>Выплаты</span><b>30-го аванс</b><small>15-го — зарплата за прошлый месяц</small></div>
+              <div><span>Проживание</span><b>Гостиница</b><small>2–3 человека в комнате</small></div>
+              <div><span>Питание</span><b>Трёхразовое</b><small>Доставка на объект и в гостиницу</small></div>
+              <div><span>Выплаты</span><b>30-го аванс</b><small>15-го — зарплата</small></div>
               <div><span>Билеты</span><b>Оплачиваются</b></div>
             </div>
-            <a class="button button-gold vacancy-apply" href="#apply" data-vacancy-key="general" data-vacancy-title="Разнорабочий">Откликнуться на вакансию</a>
+            <a class="button button-primary vacancy-apply magnetic" href="#apply" data-vacancy-key="general" data-vacancy-title="Разнорабочий"><span>Откликнуться</span><i>↘</i></a>
           </div>
         </article>
 
-        <article class="vacancy" data-vacancy-key="foreman">
+        <article class="vacancy reveal" data-reveal data-vacancy-key="foreman">
           <button class="vacancy-trigger" type="button" aria-expanded="false">
+            <span class="vacancy-index">03</span>
             <span class="vacancy-main"><small>Набор открыт</small><strong>Мастер-прораб</strong><em>Организация работ и управление бригадами</em></span>
-            <span class="vacancy-pay">200–250 тыс. ₽<small>/ вахтовый месяц</small></span><span class="plus" aria-hidden="true"></span>
+            <span class="vacancy-pay">200–250 тыс. ₽<small>за вахтовый месяц</small></span>
+            <span class="vacancy-arrow" aria-hidden="true">↘</span>
           </button>
           <div class="vacancy-panel" hidden>
-            <div class="vacancy-photo"><img src="assets/hero-dc24977.webp" alt="Строительство кафедрального собора в Мурманске"></div>
             <div class="details">
               <div><span>Объект</span><b>Кафедральный собор</b><small>Центр Мурманска</small></div>
               <div><span>Задачи</span><b>Организация работ</b><small>Контроль бригад, сроков и качества</small></div>
               <div><span>Вахта</span><b>От 2 месяцев</b></div>
-              <div><span>Оплата</span><b>200 000–250 000 ₽</b><small>За вахтовый месяц</small></div>
+              <div><span>Оплата</span><b>200 000–250 000 ₽</b></div>
               <div><span>Проживание</span><b>Предоставляется</b></div>
               <div><span>Питание</span><b>Предоставляется</b></div>
-              <div><span>Условия</span><b>Обсуждаются с HR</b><small>После рассмотрения опыта</small></div>
+              <div><span>Условия</span><b>После собеседования</b><small>Зависит от опыта</small></div>
               <div><span>Билеты</span><b>Оплачиваются</b></div>
             </div>
-            <a class="button button-gold vacancy-apply" href="#apply" data-vacancy-key="foreman" data-vacancy-title="Мастер-прораб">Откликнуться на вакансию</a>
+            <a class="button button-primary vacancy-apply magnetic" href="#apply" data-vacancy-key="foreman" data-vacancy-title="Мастер-прораб"><span>Откликнуться</span><i>↘</i></a>
           </div>
         </article>
 
-        <article class="vacancy" data-vacancy-key="site_manager">
+        <article class="vacancy reveal" data-reveal data-vacancy-key="site_manager">
           <button class="vacancy-trigger" type="button" aria-expanded="false">
+            <span class="vacancy-index">04</span>
             <span class="vacancy-main"><small>Набор открыт</small><strong>Начальник участка</strong><em>Руководство строительным участком</em></span>
-            <span class="vacancy-pay">250–300 тыс. ₽<small>/ вахтовый месяц</small></span><span class="plus" aria-hidden="true"></span>
+            <span class="vacancy-pay">250–300 тыс. ₽<small>за вахтовый месяц</small></span>
+            <span class="vacancy-arrow" aria-hidden="true">↘</span>
           </button>
           <div class="vacancy-panel" hidden>
-            <div class="vacancy-photo"><img src="assets/hero-dc24977.webp" alt="Строительный объект в центре Мурманска"></div>
             <div class="details">
               <div><span>Объект</span><b>Кафедральный собор</b><small>Центр Мурманска</small></div>
-              <div><span>Задачи</span><b>Управление участком</b><small>Люди, сроки, качество и производственный план</small></div>
+              <div><span>Задачи</span><b>Управление участком</b><small>Люди, сроки и производственный план</small></div>
               <div><span>Вахта</span><b>От 2 месяцев</b></div>
-              <div><span>Оплата</span><b>250 000–300 000 ₽</b><small>За вахтовый месяц</small></div>
+              <div><span>Оплата</span><b>250 000–300 000 ₽</b></div>
               <div><span>Проживание</span><b>Предоставляется</b></div>
               <div><span>Питание</span><b>Предоставляется</b></div>
-              <div><span>Условия</span><b>Обсуждаются с HR</b><small>После рассмотрения опыта</small></div>
+              <div><span>Условия</span><b>После собеседования</b><small>Зависит от опыта</small></div>
               <div><span>Билеты</span><b>Оплачиваются</b></div>
             </div>
-            <a class="button button-gold vacancy-apply" href="#apply" data-vacancy-key="site_manager" data-vacancy-title="Начальник участка">Откликнуться на вакансию</a>
+            <a class="button button-primary vacancy-apply magnetic" href="#apply" data-vacancy-key="site_manager" data-vacancy-title="Начальник участка"><span>Откликнуться</span><i>↘</i></a>
           </div>
         </article>
       </div>
     </section>
 
-    <section class="section living" id="living">
-      <div class="section-head living-head">
-        <div><span class="kicker">Проживание</span><h2>Чисто и рядом</h2></div>
-        <p>2–3 человека в комнате<br>15 минут до объекта</p>
-      </div>
-      <div class="gallery gallery-pair gallery-no-labels">
-        <button class="gallery-item" type="button"><img src="assets/room-dc24977.webp" alt="Комната в гостинице"></button>
-        <button class="gallery-item" type="button"><img src="assets/corridor-dc24977.webp" alt="Коридор гостиницы"></button>
-      </div>
-    </section>
-
-    <section class="partners" id="partners" aria-label="Компании, с которыми работаем в Мурманске">
-      <div class="partners-copy"><span class="kicker">Мурманск</span><h2>Работаем вместе</h2><p>ПСМ · Коксохиммонтаж · ФосАгро</p></div>
-      <div class="partner-logos partner-text-logos">
-        <div class="brand-card brand-psm">ПСМ</div>
-        <div class="brand-card brand-khm"><b>КХМ</b><small>Коксохиммонтаж</small></div>
-        <div class="brand-card brand-fosagro"><span class="brand-flower">✿</span>ФОСАГРО</div>
+    <section class="object-story" id="about">
+      <figure class="object-media" aria-hidden="true">
+        <img src="assets/hero-dc24977.webp" alt="" loading="lazy" decoding="async">
+      </figure>
+      <div class="object-shade" aria-hidden="true"></div>
+      <div class="object-content">
+        <span class="section-number reveal" data-reveal>02 / Объект</span>
+        <h2 class="reveal" data-reveal>Работа, которую<br>видно в масштабе города</h2>
+        <p class="reveal" data-reveal>Кафедральный собор строится в центре Мурманска. Здесь важны дисциплина, сильная команда и понятный результат каждого дня.</p>
+        <div class="object-stats">
+          <div class="reveal" data-reveal><b data-count="4">0</b><span>открытые вакансии</span></div>
+          <div class="reveal" data-reveal><b data-count="15">0</b><span>минут до объекта</span></div>
+          <div class="reveal" data-reveal><b data-count="3">0</b><span>приёма пищи в день</span></div>
+        </div>
       </div>
     </section>
 
-    <section class="section apply" id="apply">
-      <div class="apply-copy"><span class="kicker">Отклик</span><h2>Готовы на вахту?</h2><p>Выберите вакансию и заполните короткую анкету. После отправки заявка сразу появится в кадровой CRM AppСтрой.</p></div>
-      <form class="form" id="application-form">
+    <section class="living section" id="living">
+      <div class="living-copy sticky-intro">
+        <span class="section-number reveal" data-reveal>03 / Проживание</span>
+        <h2 class="reveal" data-reveal>После смены — нормальные условия</h2>
+        <p class="reveal" data-reveal>Чистая гостиница в пятнадцати минутах от объекта. В комнатах живут по 2–3 человека.</p>
+        <div class="amenity-list reveal" data-reveal>
+          <span>Душевые</span><span>Санузлы</span><span>Холодильники</span><span>Уборка</span>
+        </div>
+      </div>
+
+      <div class="living-gallery">
+        <button class="living-shot living-shot-wide reveal" data-reveal type="button">
+          <img src="assets/room-dc24977.webp" alt="Комната в гостинице" loading="lazy" decoding="async">
+          <span><small>01</small>Комната</span>
+        </button>
+        <button class="living-shot living-shot-tall reveal" data-reveal type="button">
+          <img src="assets/corridor-dc24977.webp" alt="Коридор гостиницы" loading="lazy" decoding="async">
+          <span><small>02</small>Гостиница</span>
+        </button>
+        <div class="living-note reveal" data-reveal>
+          <small>Быт</small>
+          <p>В гостинице есть всё необходимое для постоянного проживания во время вахты.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="partners" id="partners">
+      <div class="partners-heading reveal" data-reveal>
+        <span class="section-number">04 / Опыт</span>
+        <h2>Работаем с крупными<br>промышленными компаниями</h2>
+      </div>
+      <div class="logo-rail" aria-label="Партнёры">
+        <div class="logo-track">
+          <span class="logo logo-psm">ПСМ</span>
+          <span class="logo logo-khm">КХМ<small>Коксохиммонтаж</small></span>
+          <span class="logo logo-fos">✿ ФОСАГРО</span>
+          <span class="logo logo-psm">ПСМ</span>
+          <span class="logo logo-khm">КХМ<small>Коксохиммонтаж</small></span>
+          <span class="logo logo-fos">✿ ФОСАГРО</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="apply section" id="apply">
+      <div class="apply-copy sticky-intro">
+        <span class="section-number reveal" data-reveal>05 / Отклик</span>
+        <h2 class="reveal" data-reveal>Готовы ехать<br>на вахту?</h2>
+        <p class="reveal" data-reveal>Заполните короткую форму. Заявка сразу попадёт в кадровую систему AppСтрой.</p>
+        <div class="selected-vacancy reveal" data-reveal aria-live="polite">
+          <small>Выбранная вакансия</small>
+          <strong id="selected-vacancy-title">Бетонщик-арматурщик</strong>
+          <a href="#vacancies">Изменить</a>
+        </div>
+      </div>
+
+      <form class="form reveal" data-reveal id="application-form">
         <input type="hidden" id="vacancy-key" value="concrete">
-        <div class="selected-vacancy form-wide" aria-live="polite"><span>Выбранная вакансия</span><strong id="selected-vacancy-title">Бетонщик-арматурщик</strong><a href="#vacancies">Изменить</a></div>
         <label><span>ФИО</span><input type="text" id="full-name" autocomplete="name" placeholder="Иван Иванов" maxlength="160" required></label>
         <label><span>Телефон</span><input type="tel" id="phone" autocomplete="tel" inputmode="tel" placeholder="+7 999 000-00-00" maxlength="30" required></label>
         <label><span>Город</span><input type="text" id="city" autocomplete="address-level2" placeholder="Ваш город" maxlength="160" required></label>
         <label><span>Опыт</span><select id="experience" required><option value="" selected disabled>Выберите</option><option>Без опыта</option><option>До 1 года</option><option>1–3 года</option><option>Более 3 лет</option></select></label>
-        <label class="form-wide"><span>Комментарий</span><textarea id="comment" rows="3" maxlength="2000" placeholder="Разряд, опыт и когда готовы выехать"></textarea></label>
+        <label class="form-wide"><span>Комментарий</span><textarea id="comment" rows="4" maxlength="2000" placeholder="Разряд, опыт и когда готовы выехать"></textarea></label>
         <label class="hp-field" aria-hidden="true"><span>Сайт</span><input type="text" id="website" tabindex="-1" autocomplete="off"></label>
-        <label class="consent form-wide"><input type="checkbox" id="consent" required><span>Согласен на обработку данных. <a href="privacy.html" target="_blank">Политика</a></span></label>
-        <button class="button button-gold form-wide" id="submit-application" type="submit">Отправить заявку</button>
-        <p class="form-note form-wide">После отправки мы получим заявку в AppСтрой и свяжемся с вами по телефону.</p>
+        <label class="consent form-wide"><input type="checkbox" id="consent" required><span>Согласен на обработку данных. <a href="privacy.html" target="_blank">Политика конфиденциальности</a></span></label>
+        <button class="button button-primary form-wide magnetic" id="submit-application" type="submit"><span>Отправить заявку</span><i>↗</i></button>
+        <p class="form-note form-wide">После отправки мы свяжемся с вами по указанному телефону.</p>
       </form>
     </section>
   </main>
 
-  <footer class="footer"><span>ООО «СКБС»</span><span>Работа на строительных объектах</span><a href="#top">Наверх ↑</a></footer>
+  <footer class="footer">
+    <a class="brand" href="#top"><span class="brand-mark">С</span><span>СКБС</span></a>
+    <p>Строительные работы на промышленных и гражданских объектах</p>
+    <a class="footer-up" href="#top">Наверх ↑</a>
+  </footer>
 
-  <dialog class="lightbox" aria-label="Просмотр фотографии"><button class="lightbox-close" type="button" aria-label="Закрыть">×</button><img src="" alt=""></dialog>
+  <dialog class="lightbox" aria-label="Просмотр фотографии">
+    <button class="lightbox-close" type="button" aria-label="Закрыть">×</button>
+    <img src="" alt="">
+  </dialog>
   <div class="toast" role="status" aria-live="polite"></div>
-  <script src="script.js?v=vacancies-2"></script>
+
+  <script src="script.js?v=premium-motion-1"></script>
 </body>
 </html>
