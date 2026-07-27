@@ -1,5 +1,21 @@
 (() => {
+  const vacancyTitles = {
+    concrete: 'Бетонщик-арматурщик',
+    general: 'Разнорабочий',
+    foreman: 'Мастер-прораб',
+    site_manager: 'Начальник участка'
+  };
   const vacancies = [...document.querySelectorAll('.vacancy')];
+  const vacancyKeyField = document.querySelector('#vacancy-key');
+  const selectedVacancyTitle = document.querySelector('#selected-vacancy-title');
+
+  const selectVacancy = (key, title = vacancyTitles[key]) => {
+    if (!vacancyTitles[key] || !vacancyKeyField || !selectedVacancyTitle) return;
+    vacancyKeyField.value = key;
+    selectedVacancyTitle.textContent = title || vacancyTitles[key];
+    vacancies.forEach((item) => item.classList.toggle('is-selected', item.dataset.vacancyKey === key));
+  };
+
   vacancies.forEach((vacancy) => {
     const trigger = vacancy.querySelector('.vacancy-trigger');
     const panel = vacancy.querySelector('.vacancy-panel');
@@ -18,6 +34,14 @@
       }
     });
   });
+
+  document.querySelectorAll('.vacancy-apply').forEach((link) => {
+    link.addEventListener('click', () => {
+      const key = link.dataset.vacancyKey || '';
+      selectVacancy(key, link.dataset.vacancyTitle);
+    });
+  });
+  selectVacancy(vacancyKeyField?.value || 'concrete');
 
   const dialog = document.querySelector('.lightbox');
   const dialogImage = dialog?.querySelector('img');
@@ -50,6 +74,7 @@
 
   const errorMessage = (code) => {
     switch (code) {
+      case 'invalid_vacancy': return 'Выберите вакансию ещё раз.';
       case 'invalid_phone': return 'Проверьте номер телефона.';
       case 'invalid_full_name': return 'Укажите полное ФИО.';
       case 'invalid_city': return 'Укажите ваш город.';
@@ -74,6 +99,7 @@
       ?? `site-${Date.now()}-${Math.random().toString(16).slice(2)}`;
     const payload = {
       requestId,
+      vacancyKey: vacancyKeyField?.value || '',
       fullName: document.querySelector('#full-name')?.value || '',
       phone: document.querySelector('#phone')?.value || '',
       city: document.querySelector('#city')?.value || '',
@@ -97,8 +123,10 @@
       }
 
       const number = data.number ? ` №${data.number}` : '';
-      showToast(`Заявка${number} принята. Она уже появилась в AppСтрой. Скоро с вами свяжутся.`, 8000);
+      const title = vacancyTitles[payload.vacancyKey] || 'вакансию';
+      showToast(`Заявка${number} на вакансию «${title}» принята. Она уже появилась в AppСтрой.`, 8000);
       form.reset();
+      selectVacancy('concrete');
       formStartedAt = Date.now();
     } catch (error) {
       showToast(errorMessage(error?.message));
