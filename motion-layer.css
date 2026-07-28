@@ -1,8 +1,8 @@
 main{
   --scene-mix:0;
   --scene-visibility:1;
-  --scene-a-scale:1.02;
-  --scene-b-scale:1.045;
+  --scene-a-scale:1.012;
+  --scene-b-scale:1.035;
   position:relative;
   isolation:isolate;
   z-index:0;
@@ -12,7 +12,7 @@ main::before,
 main::after{
   content:"";
   position:fixed;
-  inset:-2.5%;
+  inset:-2%;
   z-index:0;
   pointer-events:none;
   background-repeat:no-repeat;
@@ -23,17 +23,17 @@ main::after{
 }
 
 main::before{
-  background-image:url('https://dxbrhsefgxcaxzmrbfrb.supabase.co/functions/v1/site-background-image?kind=panorama');
+  background-image:url('assets/hero-dc24977.webp');
   background-position:center center;
   opacity:calc(var(--scene-visibility) * (1 - var(--scene-mix)));
   transform:translate3d(0,calc(var(--scene-mix) * -1%),0) scale(var(--scene-a-scale));
 }
 
 main::after{
-  background-image:url('https://dxbrhsefgxcaxzmrbfrb.supabase.co/functions/v1/site-background-image?kind=workers');
+  background-image:url('https://dxbrhsefgxcaxzmrbfrb.supabase.co/functions/v1/site-background-image?kind=workers&v=3');
   background-position:54% center;
   opacity:calc(var(--scene-visibility) * var(--scene-mix));
-  transform:translate3d(0,calc((1 - var(--scene-mix)) * 1.2%),0) scale(var(--scene-b-scale));
+  transform:translate3d(0,calc((1 - var(--scene-mix)) * 1.1%),0) scale(var(--scene-b-scale));
 }
 
 main>*,
@@ -56,9 +56,6 @@ main>*,
 .hero-shade{
   z-index:1;
   pointer-events:none;
-  background:
-    linear-gradient(90deg,rgba(5,5,4,.91) 0%,rgba(5,5,4,.72) 38%,rgba(5,5,4,.2) 74%,rgba(5,5,4,.43) 100%),
-    linear-gradient(180deg,rgba(0,0,0,.08),rgba(0,0,0,.02) 48%,rgba(8,8,7,.84) 100%);
 }
 
 .hero-grid,
@@ -83,7 +80,7 @@ main>*,
 }
 
 @media(max-width:760px){
-  main::before{background-position:60% center}
+  main::before{background-position:61% center}
   main::after{background-position:65% center}
   .vacancies{background:rgba(13,13,11,.92)}
 }
